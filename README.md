@@ -2,9 +2,9 @@
 
 | Student's name | SCIPER |
 | -------------- | ------ |
-| | |
-| | |
-| | |
+| Pierre Schutz | 272648 |
+| Nathan Kammoun | 282625 |
+| David Cian | 287967 |
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
@@ -23,6 +23,12 @@ Please, fill the following sections about your project.
 >
 > Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)), you could use also the DataSets proposed by the ENAC (see the Announcements section on Zulip).
 
+
+For this project, we will be using the [Spotify Web API data](https://developer.spotify.com/documentation/web-api/). The data is very high quality as comes from a commercial database in use. We do not need data-cleaning and can query general data as well as user data (for one specific user given that she\he is connected.).
+API Reference: https://developer.spotify.com/documentation/web-api/reference/
+Spotify Application: 
+
+
 ### Problematic
 
 > Frame the general topic of your visualization and the main axis that you want to develop.
@@ -38,9 +44,14 @@ Please, fill the following sections about your project.
 
 
 > - What others have already done with the data?
+This API is very popular. Therefore a lot of different work have been performed on it. Here is a list of projects provided on Spotify website that consume the API: https://developer.spotify.com/community/showcase/
 > - Why is your approach original?
+
 > - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
+
 > - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
+No
+
 
 ## Milestone 2 (7th May, 5pm)
 
