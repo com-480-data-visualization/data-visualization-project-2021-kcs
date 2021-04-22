@@ -102,15 +102,12 @@ Spotify API provides a list of track features that we will use to analyse the tr
 
 ### Related work
 
+The Spotify API is very popular. Spotify has a well documented API and provides a lot useful tools on a dedicated ‘Spotify for Developers’ website. 
 
-> - What others have already done with the data?
-This API is very popular. Therefore a lot of different work have been performed on it. Here is a list of projects provided on Spotify website that consume the API: https://developer.spotify.com/community/showcase/
-> - Why is your approach original?
+Spotify showcase a broad panel of the works done through their API. It was a great source of inspiration as well as a big challenge in order to propose something original. A non exhaustive list of interesting projects and visualization with Spotify data can be found here : https://developer.spotify.com/community/showcase/. 
 
-> - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
+It is difficult to bring something new to all that has already been done but we believe that taking a playlist oriented approach is both meaningful and original. As a matter of fact, our visualization will take place on a website which brings a dimension of interaction with the user. Our approach will privilege user interaction with interactive visualizations, it will focus on visually revealing playlists features, possible links between playlists or what makes them different.  The user will be able to navigate by himself through the data to visualize what he wants. It will be all the more insightful if the user connects to Spotify through the Website to visualize his own playlists.
 
-> - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
-No
 
 
 ## Milestone 2 (7th May, 5pm)
