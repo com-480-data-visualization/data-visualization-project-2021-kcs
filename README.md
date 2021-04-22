@@ -95,6 +95,14 @@ Spotify API provides a list of track features that we will use to analyse the tr
 > - What am I trying to show with my visualization?
 > - Think of an overview for the project, your motivation, and the target audience.
 
+There are many ways one can listen to music. You can search for a specific track or listen to an album, but one of the most popular ways of doing so is by listening to a playlist, the digital descendant of the mixtape. In fact, playlists are central to the Spotify experience, as all playlists created by Spotify users start out public and can be composed collaboratively. Even Spotify itself has been lauded for its recommendation engine, which can on top of recommending individual songs generate playlists for users.
+
+Beneath the surface, playlists are a stranger beast than one might expect. It is quite common for a user-made playlist to include tracks from different albums, different artists, even different genres! Furthermore, playlists represent a window into users' most minute idiosyncrasies. For this reason, playlists represent a perfect pocket of complexity to be explored visually. The goal of our visualizations is to allow Spotify users to gain insight into the patterns hiding in their playlists.
+
+Thus, the user becomes a biologist exploring the anatomical details of their playlists, in all of their beautiful diversity. The tracks in my workout playlist come from many artists, but what if their danceability or their upbeat nature is what they have in common? What about my commute playlist, what do those songs have in common? How do a playlist's characteristics change along its track order, does order matter or can one listen on shuffle? How does a playlist evolve over time? One could argue that every single playlist is bound together by some common factor hidden deep inside a user's preferences, perhaps the goal of eliciting a certain cocktail of feelings.
+
+Our hope is that our visualization allow users to find that common factor.
+
 ### Exploratory Data Analysis
 
 > Pre-processing of the data set you chose
