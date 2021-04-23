@@ -34,8 +34,8 @@ while additional features, such as offline listening and commercial-free listeni
 are offered via paid subscriptions. Users can search for music based on artist, album, 
 or genre, and can create, edit, and share playlists.” 
 
-This data is high quality as it contains production-ready data that are users by millions of customers every day. 
-We will not need pre-processing, or cleaning to use the data, and will query the API in real-time to build our website visualization. 
+This data is a high quality dataset as it contains production-ready data that are used by millions of customers every day. 
+We will not need pre-processing nor cleaning the data and will query the API in real-time to build our website visualization. 
 By doing so, we can take profit from the possibility to fetch user playlists data using Spotify Login widgets. 
 
 The Spotify API is big, we will therefore specify here the endpoints and objects that we will use through this project. 
