@@ -10,24 +10,13 @@
 
 ## Milestone 1 (23rd April, 5pm)
 
-**10% of the final grade**
-
-This is a preliminary milestone to let you set up goals for your final project and assess the feasibility of your ideas.
-Please, fill the following sections about your project.
-
-*(max. 2000 characters per section)*
-
 ### Dataset
 
-> Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
->
-> Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)), you could use also the DataSets proposed by the ENAC (see the Announcements section on Zulip).
-> 
-The dataset we will explore in this project is the Spotify dataset which contains songs, users, artists, and playlist data from the Spotify audio streaming platform. The dataset is hosted by Spotify and queried through the Spotify Web API [1].
+The dataset we will explore in this project is the Spotify dataset which contains songs, users, artists, and playlist data from the Spotify audio streaming platform. The dataset is hosted by Spotify and imported through the Spotify Web API [1].
 
 According to Wikipedia, “Spotify offers digital copyright restricted recorded music and podcasts, including more than 70 million songs, from record labels and media companies. As a freemium service, basic features are free with advertisements and limited control, while additional features, such as offline listening and commercial-free listening, are offered via paid subscriptions. Users can search for music based on artist, album, or genre, and can create, edit, and share playlists.”
 
-The data coming from Spotify Web API is of good quality as Spotify is a company that highly relies on data. The API provides clean data and there will be no need for pre-processing nor cleaning. There is a ready to use Spotify Dataset available on Kaggle built from Spotify data but we will be directly making real-time queries to the API to build our visualizations. By doing so, we will be able to fetch user playlists data using Spotify Login widgets.
+The data coming from Spotify Web API is of good quality as Spotify is a company that highly relies on data. The API provides clean data and there will be no need for pre-processing nor cleaning. There is a ready-to-use Spotify Dataset available on Kaggle pre-imported from the Spotify API but we chose to make real-time queries to the API to build our visualizations. By doing so, we will be able to fetch user playlists data using Spotify Login widgets.
 
 The Spotify API provides a wide range of queries, we will therefore specify here the endpoints and objects that we will be using through this project. See Spotify API Reference [2].
 
@@ -99,11 +88,12 @@ Our hope is that our visualization allow users to find that common factor.
 > Pre-processing of the data set you chose
 > - Show some basic statistics and get insights about the data
 
-As discussed above, we do not need to pre-process the dataset that is of very high quality. 
-We present here our data exploration trying to analyze Spotify playlists and see how we can compare them.
+As discussed above, we do not need to pre-process the dataset. 
+Through this data exploration, we wanted to show that playlists can indeed be compared in terms of audio features.
+It enabled us to confirm that we will later be able to establish meaningful playlist analysis and comparisons. 
 The detailed exploration can be found in the [milestone1_eda.ipynb](/milestone1_eda.ipynb) jupyter notebook. 
 
-Here is a non-exhaustive list of questions we asked ourselves about our problem. 
+Here is a non-exhaustive list of questions we asked ourselves about our question. 
 - What makes a playlist original?
 - How diverse is the playlist in terms of artists, genre?
 - How diverse is a playlist regarding the audio features (such as acousticness, danceability)?
@@ -154,19 +144,4 @@ Spotify showcase a broad panel of the works done through their API. It was a gre
 
 It is difficult to bring something new to all that has already been done but we believe that taking a playlist oriented approach is both meaningful and original. As a matter of fact, our visualization will take place on a website which brings a dimension of interaction with the user. Our approach will privilege user interaction with interactive visualizations, it will focus on visually revealing playlists features, possible links between playlists or what makes them different.  The user will be able to navigate by himself through the data to visualize what he wants.
 
-
-## Milestone 2 (7th May, 5pm)
-
-**10% of the final grade**
-
-
-## Milestone 3 (4th June, 5pm)
-
-**80% of the final grade**
-
-
-## Late policy
-
-- < 24h: 80% of the grade for the milestone
-- < 48h: 70% of the grade for the milestone
 
