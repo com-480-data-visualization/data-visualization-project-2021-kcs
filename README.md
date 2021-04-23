@@ -71,10 +71,6 @@ Spotify API provides a list of track features that we will use to analyze the tr
 
 ### Problematic
 
-> Frame the general topic of your visualization and the main axis that you want to develop.
-> - What am I trying to show with my visualization?
-> - Think of an overview for the project, your motivation, and the target audience.
-
 There are many ways one can listen to music. You can search for a specific track or listen to an album, but one of the most popular ways of doing so is by listening to a playlist, the digital descendant of the mixtape. In fact, playlists are central to the Spotify experience, as all playlists created by Spotify users start out public and can be composed collaboratively. Even Spotify itself has been lauded for its recommendation engine, which can on top of recommending individual songs generate playlists for users.
 
 Beneath the surface, playlists are a stranger beast than one might expect. It is quite common for a user-made playlist to include tracks from different albums, different artists, even different genres! Furthermore, playlists represent a window into users' most minute idiosyncrasies. For this reason, playlists represent a perfect pocket of complexity to be explored visually. The goal of our visualizations is to allow Spotify users to gain insight into the patterns hiding in their playlists.
@@ -138,10 +134,8 @@ The detailed exploration can be found in the [milestone1_eda.ipynb](/milestone1_
 
 ### Related work
 
-The Spotify API is very popular. Spotify has a well documented API and provides a lot useful tools on a dedicated ‘Spotify for Developers’ website. 
+The Spotify API is very popular. Spotify has a well documented API and provides a lot useful tools on a dedicated ‘Spotify for Developers’ website. Spotify showcases a broad panel of the work done through their API. It was a great source of inspiration as well as a big challenge in order to propose something original. A non exhaustive list of interesting projects and visualization with Spotify data can be found here : https://developer.spotify.com/community/showcase/. 
 
-Spotify showcase a broad panel of the works done through their API. It was a great source of inspiration as well as a big challenge in order to propose something original. A non exhaustive list of interesting projects and visualization with Spotify data can be found here : https://developer.spotify.com/community/showcase/. 
-
-It is difficult to bring something new to all that has already been done but we believe that taking a playlist oriented approach is both meaningful and original. As a matter of fact, our visualization will take place on a website which brings a dimension of interaction with the user. Our approach will privilege user interaction with interactive visualizations, it will focus on visually revealing playlists features, possible links between playlists or what makes them different.  The user will be able to navigate by himself through the data to visualize what he wants.
+It is difficult to bring something new to all that has already been done but we believe that taking a playlist oriented approach is both meaningful and original. Our visualization will take place on a website which brings a dimension of interaction. Our approach will privilege interactive visualizations, it will focus on visually revealing playlists features, possible links between playlists or what makes them different.  The user will be able to navigate by himself through the data to visualize what he wants.
 
 
