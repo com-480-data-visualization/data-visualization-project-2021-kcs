@@ -22,27 +22,18 @@ Please, fill the following sections about your project.
 > Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
 >
 > Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)), you could use also the DataSets proposed by the ENAC (see the Announcements section on Zulip).
+> 
+The dataset we will explore in this project is the Spotify dataset which contains songs, users, artists, and playlist data from the Spotify audio streaming platform. The dataset is hosted by Spotify and queried through the Spotify Web API [1].
 
-The dataset we will explore in this project with the Spotify Web API [1] which contains songs, users, artists, 
-and playlist data from Spotify audio streaming platform. 
+According to Wikipedia, “Spotify offers digital copyright restricted recorded music and podcasts, including more than 70 million songs, from record labels and media companies. As a freemium service, basic features are free with advertisements and limited control, while additional features, such as offline listening and commercial-free listening, are offered via paid subscriptions. Users can search for music based on artist, album, or genre, and can create, edit, and share playlists.”
 
-According to Wikipedia, “Spotify offers digital copyright restricted recorded music and podcasts, 
-including more than 70 million songs, from record labels and media companies.
-As a freemium service, basic features are free with advertisements and limited control, 
-while additional features, such as offline listening and commercial-free listening, 
-are offered via paid subscriptions. Users can search for music based on artist, album, 
-or genre, and can create, edit, and share playlists.” 
+The data coming from Spotify Web API is of good quality as Spotify is a company that highly relies on data. The API provides clean data and there will be no need for pre-processing nor cleaning. There is a ready to use Spotify Dataset available on Kaggle built from Spotify data but we will be directly making real-time queries to the API to build our visualizations. By doing so, we will be able to fetch user playlists data using Spotify Login widgets.
 
-This data is high quality as it contains production-ready data that are users by millions of customers every day. 
-We will not need pre-processing, or cleaning to use the data, and will query the API in real-time to build our website visualization. 
-By doing so, we can take profit from the possibility to fetch user playlists data using Spotify Login widgets. 
-
-The Spotify API is big, we will therefore specify here the endpoints and objects that we will use through this project. 
-Those can be found in the Spotify API Reference [2].
+The Spotify API provides a wide range of queries, we will therefore specify here the endpoints and objects that we will be using through this project. See Spotify API Reference [2].
 
 #### Get Playlists
 
-In order to get multiple playlists to analyse, we use the following endpoints: 
+The playlist data will be fetched using the following endpoints :
 
 **Endpoints:**
 - [Get Featured Playlists](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-featured-playlists)
@@ -161,8 +152,7 @@ The Spotify API is very popular. Spotify has a well documented API and provides 
 
 Spotify showcase a broad panel of the works done through their API. It was a great source of inspiration as well as a big challenge in order to propose something original. A non exhaustive list of interesting projects and visualization with Spotify data can be found here : https://developer.spotify.com/community/showcase/. 
 
-It is difficult to bring something new to all that has already been done but we believe that taking a playlist oriented approach is both meaningful and original. As a matter of fact, our visualization will take place on a website which brings a dimension of interaction with the user. Our approach will privilege user interaction with interactive visualizations, it will focus on visually revealing playlists features, possible links between playlists or what makes them different.  The user will be able to navigate by himself through the data to visualize what he wants. It will be all the more insightful if the user connects to Spotify through the Website to visualize his own playlists.
-
+It is difficult to bring something new to all that has already been done but we believe that taking a playlist oriented approach is both meaningful and original. As a matter of fact, our visualization will take place on a website which brings a dimension of interaction with the user. Our approach will privilege user interaction with interactive visualizations, it will focus on visually revealing playlists features, possible links between playlists or what makes them different.  The user will be able to navigate by himself through the data to visualize what he wants.
 
 
 ## Milestone 2 (7th May, 5pm)
