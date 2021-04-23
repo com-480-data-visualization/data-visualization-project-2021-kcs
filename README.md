@@ -138,4 +138,7 @@ The Spotify API is very popular. Spotify has a well documented API and provides 
 
 It is difficult to bring something new to all that has already been done but we believe that taking a playlist oriented approach is both meaningful and original. Our visualization will take place on a website which brings a dimension of interaction. Our approach will privilege interactive visualizations, it will focus on visually revealing playlists features, possible links between playlists or what makes them different.  The user will be able to navigate by himself through the data to visualize what he wants.
 
-
+Here is a list of related works and sources of inspiration we found:
+- [Spotify user profile analysis](https://obscurifymusic.com/)
+- [Spotify user's top tracks and genres visualisation](https://lsouth.github.io/spotify-visualization)
+- [Interactive historical map of music](https://musicmap.info/)
