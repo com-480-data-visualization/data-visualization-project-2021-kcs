@@ -24,8 +24,8 @@ Please, fill the following sections about your project.
 > Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)), you could use also the DataSets proposed by the ENAC (see the Announcements section on Zulip).
 
 
-The dataset we will explore in this project with the Spotify Web API [1] which contains songs, users, artists, 
-and playlist data from Spotify audio streaming platform. 
+The dataset we will explore in this project is the Spotify dataset which contains songs, users, artists, 
+and playlist data from the Spotify audio streaming platform. The dataset is hosted by Spotify and queried through the Spotify Web API [1]. 
 
 According to Wikipedia, “Spotify offers digital copyright restricted recorded music and podcasts, 
 including more than 70 million songs, from record labels and media companies.
@@ -34,9 +34,7 @@ while additional features, such as offline listening and commercial-free listeni
 are offered via paid subscriptions. Users can search for music based on artist, album, 
 or genre, and can create, edit, and share playlists.” 
 
-This data is a high quality dataset as it contains production-ready data that are used by millions of customers every day. 
-We will not need pre-processing nor cleaning the data and will query the API in real-time to build our website visualization. 
-By doing so, we can take profit from the possibility to fetch user playlists data using Spotify Login widgets. 
+The data coming from Spotify Web API is of good quality as Spotify is a company that highly relies on data. The API provides clean data and therefore there will be no need for pre-processing nor cleaning. There is a ready to use Spotify Dataset available on Kaggle built from Spotify data but we will be directly making real-time queries to the API to build our visualizations. By doing so, we will be able to fetch user playlists data using Spotify Login widgets. 
 
 The Spotify API is big, we will therefore specify here the endpoints and objects that we will use through this project. 
 Those can be found in the Spotify API Reference [2].
