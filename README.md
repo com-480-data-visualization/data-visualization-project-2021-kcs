@@ -69,6 +69,71 @@ Spotify API provides a list of track features that we will use to analyze the tr
 [2] Spotify API Reference: https://developer.spotify.com/documentation/web-api/reference/#reference-index
 
 
+
+The dataset we will explore in this project is the Spotify dataset which contains songs, users, artists, 
+and playlist data from the Spotify audio streaming platform. The dataset is hosted by Spotify and queried through the Spotify Web API [1]. 
+
+According to Wikipedia, “Spotify offers digital copyright restricted recorded music and podcasts, 
+including more than 70 million songs, from record labels and media companies.
+As a freemium service, basic features are free with advertisements and limited control, 
+while additional features, such as offline listening and commercial-free listening, 
+are offered via paid subscriptions. Users can search for music based on artist, album, 
+or genre, and can create, edit, and share playlists.” 
+
+The data coming from Spotify Web API is of good quality as Spotify is a company that highly relies on data. The API provides clean data and there will be no need for pre-processing nor cleaning. There is a ready to use Spotify Dataset available on Kaggle built from Spotify data but we will be directly making real-time queries to the API to build our visualizations. By doing so, we will be able to fetch user playlists data using Spotify Login widgets. 
+
+The Spotify API provides a wide range of queries, we will therefore specify here the endpoints and objects that we will be using through this project. 
+See Spotify API Reference [2].
+
+#### Get Playlists
+
+The playlist data will be fetched using the following endpoints : 
+
+**Endpoints:**
+- [Get Featured Playlists](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-featured-playlists)
+- [Get a Category's playlists](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-categories-playlists)
+- [Get current user's playlists](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-list-of-current-users-playlists)
+
+**Object:**
+- [PlaylistObject](https://developer.spotify.com/documentation/web-api/reference/#object-playlistobject)
+
+These endpoints enable us to fetch the features playlists, playlists by category, and user's playlists.
+We aim to use those to enable the user to select multiple playlists he wants to analyze and compare (user login will be optional).
+
+#### Tracks and Artists
+
+The playlists are a list of selected tracks, we can get details information about the 
+tracks and their authors using the tracks and artist's endpoints described below.
+
+**Endpoints:**
+- [Get an artist](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-artist)
+- [Get an artist's related artists](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-artists-related-artists)
+- [Get a track](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-track)
+
+**Objects:**
+- [ArtistObject](https://developer.spotify.com/documentation/web-api/reference/#object-artistobject)
+- [TrackObject](https://developer.spotify.com/documentation/web-api/reference/#object-trackobject)
+
+These endpoints enable us to get detailed information about the playlists tracks and artists. 
+The related artist endpoint will help us understand similarities between artists. 
+
+#### Track's audio features
+
+Finally, the feature we will be using the most is the audio features query. 
+Spotify API provides a list of track features that we will use to analyze the tracks such as
+'acousticness', 'danceability', or 'speechiness' (see AudioFeaturesObject for a detailed description).
+
+**Endpoint:**
+- [Get Audio Features](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-audio-features)
+
+**Object:**
+- [AudioFeaturesObject](https://developer.spotify.com/documentation/web-api/reference/#object-audiofeaturesobject)
+
+
+[1] Spotify Web API: https://developer.spotify.com/documentation/web-api/
+[2] Spotify API Reference: https://developer.spotify.com/documentation/web-api/reference/#reference-index
+
+
 ### Problematic
 
 There are many ways one can listen to music. You can search for a specific track or listen to an album, but one of the most popular ways of doing so is by listening to a playlist, the digital descendant of the mixtape. In fact, playlists are central to the Spotify experience, as all playlists created by Spotify users start out public and can be composed collaboratively. Even Spotify itself has been lauded for its recommendation engine, which can on top of recommending individual songs generate playlists for users.
