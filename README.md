@@ -34,14 +34,14 @@ while additional features, such as offline listening and commercial-free listeni
 are offered via paid subscriptions. Users can search for music based on artist, album, 
 or genre, and can create, edit, and share playlists.” 
 
-The data coming from Spotify Web API is of good quality as Spotify is a company that highly relies on data. The API provides clean data and therefore there will be no need for pre-processing nor cleaning. There is a ready to use Spotify Dataset available on Kaggle built from Spotify data but we will be directly making real-time queries to the API to build our visualizations. By doing so, we will be able to fetch user playlists data using Spotify Login widgets. 
+The data coming from Spotify Web API is of good quality as Spotify is a company that highly relies on data. The API provides clean data and there will be no need for pre-processing nor cleaning. There is a ready to use Spotify Dataset available on Kaggle built from Spotify data but we will be directly making real-time queries to the API to build our visualizations. By doing so, we will be able to fetch user playlists data using Spotify Login widgets. 
 
-The Spotify API is big, we will therefore specify here the endpoints and objects that we will use through this project. 
-Those can be found in the Spotify API Reference [2].
+The Spotify API provides a wide range of queries, we will therefore specify here the endpoints and objects that we will be using through this project. 
+See Spotify API Reference [2].
 
 #### Get Playlists
 
-In order to get multiple playlists to analyse, we use the following endpoints: 
+The playlist data will be fetched using the following endpoints : 
 
 **Endpoints:**
 - [Get Featured Playlists](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-featured-playlists)
@@ -68,12 +68,12 @@ tracks and their authors using the tracks and artist's endpoints described below
 - [ArtistObject](https://developer.spotify.com/documentation/web-api/reference/#object-artistobject)
 - [TrackObject](https://developer.spotify.com/documentation/web-api/reference/#object-trackobject)
 
-These endpoints enable us to get detailed information about the playlists' tracks and artists. 
-The related artist's endpoint will help us understand similarities between artists. 
+These endpoints enable us to get detailed information about the playlists tracks and artists. 
+The related artist endpoint will help us understand similarities between artists. 
 
 #### Track's audio features
 
-Finally, we most interesting feature of this Spotify API, the audio features. 
+Finally, the feature we will be using the most is the audio features query. 
 Spotify API provides a list of track features that we will use to analyze the tracks such as
 'acousticness', 'danceability', or 'speechiness' (see AudioFeaturesObject for a detailed description).
 
@@ -86,8 +86,6 @@ Spotify API provides a list of track features that we will use to analyze the tr
 
 [1] Spotify Web API: https://developer.spotify.com/documentation/web-api/
 [2] Spotify API Reference: https://developer.spotify.com/documentation/web-api/reference/#reference-index
-
-
 
 
 ### Problematic
@@ -103,11 +101,12 @@ Spotify API provides a list of track features that we will use to analyze the tr
 
 ### Related work
 
+The Spotify API is very popular. Spotify has a well documented API and provides a lot useful tools on a dedicated ‘Spotify for Developers’ website. 
 
-> - What others have already done with the data?
-> - Why is your approach original?
-> - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
-> - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
+Spotify showcase a broad panel of the works done through their API. It was a great source of inspiration as well as a big challenge in order to propose something original. A non exhaustive list of interesting projects and visualization with Spotify data can be found here : https://developer.spotify.com/community/showcase/. 
+
+It is difficult to bring something new to all that has already been done but we believe that taking a playlist oriented approach is both meaningful and original. As a matter of fact, our visualization will take place on a website which brings a dimension of interaction with the user. Our approach will privilege user interaction with interactive visualizations, it will focus on visually revealing playlists features, possible links between playlists or what makes them different.  The user will be able to navigate by himself through the data to visualize what he wants. It will be all the more insightful if the user can connect to Spotify through the Website to visualize his own playlists.
+
 
 ## Milestone 2 (7th May, 5pm)
 
