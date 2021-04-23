@@ -109,25 +109,24 @@ Our hope is that our visualization allow users to find that common factor.
 > - Show some basic statistics and get insights about the data
 
 As discussed above, we do not need to pre-process the dataset that is of very high quality. 
-We will present here our data exploration with the goal of understanding playlists' data and see how we can compare them.
+We present here our data exploration trying to analyze Spotify playlists and see how we can compare them.
 The detailed exploration can be found in the [milestone1_eda.ipynb](/milestone1_eda.ipynb) jupyter notebook. 
 
-Here is a non exhaustive list of questions we asked ourselves about our problem. 
+Here is a non-exhaustive list of questions we asked ourselves about our problem. 
 - What makes a playlist original?
-- How diverse is the playlist in term of artists, genre?
-- How diverse are tracks within one playlist regarding the audio features (e.g. acousticness, danceability) ?
-- How the different parameters (artists, genre, audio features) help us compare playlists ? 
+- How diverse is the playlist in terms of artists, genre?
+- How diverse is a playlist regarding the audio features (such as acousticness, danceability)?
+- How the different parameters (artists, genre, audio features) help us compare playlists? 
 
-In the exploration, we first make the analysis of one playlist 
-and observe it's different parameters, and then compare it with another playlist.
+In the exploration, we first analyze one playlist 
+and observe its different parameters, and then compare it with another playlist.
 
-The playlists used for this exploration are 'Rock Classics' and 'Oldies but Goldies'.
-After comparing the audio features, we observed the following
+The playlists used for this exploration are 'Rock Classics' and 'Oldies but Goldies'. After comparing the audio features, we observed:
 
-- 'Oldies but Goldies' has significantly higher valance than 'Rock Classics'.
-- 'Rock Classics' songs duration are much longer (duration_ms) than 'Oldies but Goldies'.
-- 'Rock Classics' tends to have more energy than 'Oldies but Goldies'.
-- 'Oldies but Goldies' have higher danceability than 'Rock Classics'. 
+- 'Oldies but Goldies' has significantly higher valance than 'Rock Classics'
+- 'Rock Classics' songs duration are much longer (duration_ms) than 'Oldies but Goldies'
+- 'Rock Classics' tends to have more energy than 'Oldies but Goldies'
+- 'Oldies but Goldies' have higher danceability than 'Rock Classics'
 
 We present here some of the plots that we got from observing the two playlists: 
 
@@ -137,7 +136,7 @@ We present here some of the plots that we got from observing the two playlists:
 #### Figure 2. Artists relations graph  (Rock Classics)
 ![](eda_images/eda_graph_rock.png)
 
-#### Figure 3. Number of track per artist (Oldies but Goldies)
+#### Figure 3. Artists relations graph (Oldies but Goldies)
 ![](eda_images/eda_graph_oldies.png)
 
 #### Figure 4. Number of track per genre (Oldies but Goldies)
