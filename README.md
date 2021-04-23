@@ -33,56 +33,56 @@ while additional features, such as offline listening and commercial-free listeni
 are offered via paid subscriptions. Users can search for music based on artist, album, 
 or genre, and can create, edit, and share playlists.” 
 
-This data is high quality as it contains production ready data that are users by millions on customers everyday. 
-We will not need pre-processing, or cleaning to use the data, and will query the API in real-time to build our website visualisation. 
-Doing so, we can take profit of the possibility to fetch user playlists data using Spotify Login widgets. 
+This data is high quality as it contains production-ready data that are users by millions of customers every day. 
+We will not need pre-processing, or cleaning to use the data, and will query the API in real-time to build our website visualization. 
+By doing so, we can take profit from the possibility to fetch user playlists data using Spotify Login widgets. 
 
 The Spotify API is big, we will therefore specify here the endpoints and objects that we will use through this project. 
-Those can be found the the Spotify API Reference [2].
+Those can be found in the Spotify API Reference [2].
 
 #### Get Playlists
 
-In order to get playlist, we have 3 endpoints available to us: 
+In order to get multiple playlists to analyse, we use the following endpoints: 
 
 **Endpoints:**
-- Get Featured Playlists: https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-featured-playlists
-- Get a Category's playlists: https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-categories-playlists
-- Get current user's playlists: https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-list-of-current-users-playlists
-
+- [Get Featured Playlists](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-featured-playlists)
+- [Get a Category's playlists](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-categories-playlists)
+- [Get current user's playlists](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-list-of-current-users-playlists)
 
 **Object:**
-- PlaylistObject: https://developer.spotify.com/documentation/web-api/reference/#object-playlistobject
+- [PlaylistObject](https://developer.spotify.com/documentation/web-api/reference/#object-playlistobject)
 
-These endpoints enable us to fetch the features playlists, playlists by category, and users playlists.
-We aims to use those to enable the use select multiple playlist he want to analyse and compare (user login will be optional).
+These endpoints enable us to fetch the features playlists, playlists by category, and user's playlists.
+We aim to use those to enable the user to select multiple playlists he wants to analyze and compare (user login will be optional).
 
 #### Tracks and Artists
 
 The playlists are a list of selected tracks, we can get details information about the 
-tracks and their authors using the tracks and artists endpoints described below.
+tracks and their authors using the tracks and artist's endpoints described below.
 
 **Endpoints:**
-- Get an artist: https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-artist
-- Get an artist's related artists: https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-artists-related-artists
-- Get a track: https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-track
+- [Get an artist](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-artist)
+- [Get an artist's related artists](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-artists-related-artists)
+- [Get a track](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-track)
 
 **Objects:**
-- ArtistObject: https://developer.spotify.com/documentation/web-api/reference/#object-artistobject
-- TrackObject: https://developer.spotify.com/documentation/web-api/reference/#object-trackobject
+- [ArtistObject](https://developer.spotify.com/documentation/web-api/reference/#object-artistobject)
+- [TrackObject](https://developer.spotify.com/documentation/web-api/reference/#object-trackobject)
 
 These endpoints enable us to get detailed information about the playlists' tracks and artists. 
-The related artists endpoint will help us understand similarities between artists. 
+The related artist's endpoint will help us understand similarities between artists. 
 
 #### Track's audio features
 
 Finally, we most interesting feature of this Spotify API, the audio features. 
-Spotify API provides a list of track features that we will use to analyse the tracks such as
-'acousticness', 'danceability', or 'speechiness' (see AudioFeaturesObject for a detailed description of them)
+Spotify API provides a list of track features that we will use to analyze the tracks such as
+'acousticness', 'danceability', or 'speechiness' (see AudioFeaturesObject for a detailed description).
 
 **Endpoint:**
-- Get Audio Features: https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-audio-features
+- [Get Audio Features](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-audio-features)
+
 **Object:**
-- AudioFeaturesObject: https://developer.spotify.com/documentation/web-api/reference/#object-audiofeaturesobject
+- [AudioFeaturesObject](https://developer.spotify.com/documentation/web-api/reference/#object-audiofeaturesobject)
 
 
 [1] Spotify Web API: https://developer.spotify.com/documentation/web-api/
@@ -107,6 +107,54 @@ Our hope is that our visualization allow users to find that common factor.
 
 > Pre-processing of the data set you chose
 > - Show some basic statistics and get insights about the data
+
+As discussed above, we do not need to pre-process the dataset that is of very high quality. 
+We will present here our data exploration with the goal of understanding playlists' data and see how we can compare them.
+The detailed exploration can be found in the [milestone1_eda.ipynb](/milestone1_eda.ipynb) jupyter notebook. 
+
+Here is a non exhaustive list of questions we asked ourselves about our problem. 
+- What makes a playlist original?
+- How diverse is the playlist in term of artists, genre?
+- How diverse are tracks within one playlist regarding the audio features (e.g. acousticness, danceability) ?
+- How the different parameters (artists, genre, audio features) help us compare playlists ? 
+
+In the exploration, we first make the analysis of one playlist 
+and observe it's different parameters, and then compare it with another playlist.
+
+The playlists used for this exploration are 'Rock Classics' and 'Oldies but Goldies'.
+After comparing the audio features, we observed the following
+
+- 'Oldies but Goldies' has significantly higher valance than 'Rock Classics'.
+- 'Rock Classics' songs duration are much longer (duration_ms) than 'Oldies but Goldies'.
+- 'Rock Classics' tends to have more energy than 'Oldies but Goldies'.
+- 'Oldies but Goldies' have higher danceability than 'Rock Classics'. 
+
+We present here some of the plots that we got from observing the two playlists: 
+
+#### Figure 1. Number of track per artist (Rock Classics)
+![](eda_images/eda_artist_rock.png)
+
+#### Figure 2. Artists relations graph  (Rock Classics)
+![](eda_images/eda_graph_rock.png)
+
+#### Figure 3. Number of track per artist (Oldies but Goldies)
+![](eda_images/eda_graph_oldies.png)
+
+#### Figure 4. Number of track per genre (Oldies but Goldies)
+![](eda_images/eda_genre_oldies.png)
+
+#### Figure 5. Number of track per release year (Rock Classics)
+![](eda_images/eda_release_rock.png)
+
+#### Figure 6. Audio features distribution (Rock Classics and Oldies but Goldies)
+![](eda_images/eda_audio_features_compare.png)
+
+The detailed exploration can be found in the [milestone1_eda.ipynb](/milestone1_eda.ipynb) jupyter notebook. 
+
+**Python notebooks:**
+- Detailed playlists exploration: [milestone1_eda.ipynb](milestone1_eda.ipynb)
+- Broader dataset exploration: [data_exploration](data_exploration.ipynb)
+
 
 ### Related work
 
