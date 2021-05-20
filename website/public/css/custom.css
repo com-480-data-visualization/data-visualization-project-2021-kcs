@@ -5,7 +5,7 @@ html {
 
 body {
     background-color: #10171a;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     color: rgba(255, 255, 255, 0.329);
     width: 100%;
@@ -15,11 +15,10 @@ body {
     letter-spacing: 0.1em;
 }
 
-#playlist-row {
+.playlist-row {
 
     width: 100%;
     margin: auto;
-    padding: auto;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -29,10 +28,7 @@ body {
 #user-playlists {
 
     width: 100%;
-    margin: auto;
-    margin-top: 50px;
-    margin-bottom: 80px;
-    padding: auto;
+    margin: 50px auto 80px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -62,7 +58,7 @@ h2 {
 hr {
     border: 0;
     height: 1px;
-    background-image: linear-gradient(to right, rgb(150, 150, 150, 0), rgba(240, 240, 240, 1), rgba(150, 150, 150, 0));
+    background-image: linear-gradient(to right, rgba(150, 150, 150, 0), rgba(240, 240, 240, 1), rgba(150, 150, 150, 0));
 }
 
  #login, #loggedin {
@@ -102,6 +98,12 @@ hr {
     margin:30px;
 }
 
+
+iframe {
+    border: 0;
+}
+
+
 .centered-container {
     text-align: center;
     margin: 50px;
@@ -114,16 +116,14 @@ hr {
     width : 100%;
     display: inline-block;
     text-align: center;
-    margin: auto;
-    margin-bottom: 20px;
+    margin: auto auto 20px;
 }
 
 .y-selection{
     width : 100%;
     display: inline-block;
     text-align: center;
-    margin: auto;
-    margin-bottom: 20px;
+    margin: auto auto 20px;
 }
 
 
@@ -149,14 +149,14 @@ hr {
 
 .mdl-chip {
     height: 40px;
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     line-height: 40px;
-    padding: 6 20px;
+    padding: 6px 20px;
     border: 0;
     border-radius: 10px;
     background-color: #fefefe;
     color: rgba(0,0,0, 0.87);
-    margin: 2px 0px 20px;
+    margin: 2px 0 20px;
     font-size: 0;
     white-space: nowrap; 
 }

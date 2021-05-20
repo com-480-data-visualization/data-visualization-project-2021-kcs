@@ -1,6 +1,6 @@
 <!doctype html>
-<html>
-  <head>
+<html lang="en">
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -20,276 +20,303 @@
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
 
-  </head>
+</head>
 
-  <body>
-
-
-    <script>
-      var user_data = []
-      var website_data = []
-    </script>
-
-    <!-- Always shows a header, even in smaller screens. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<body>
 
 
-      <header class="mdl-layout__header">
+<script>
+    let user_data = [];
+    let website_data = [];
+</script>
+
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+
+    <!-- PAGE TOP BAR HEADER -->
+    <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-          <!-- Title -->
-          <span class="mdl-layout-title">PLAYLIST EXPLORER</span>
-          <!-- Add spacer, to align navigation to the right -->
-          <div class="mdl-layout-spacer"></div>
-          <!-- Navigation. We hide it in small screens. -->
-          <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="">Home</a>
-            <a class="mdl-navigation__link" href="">About</a>
-          </nav>
+            <!-- Title -->
+            <span class="mdl-layout-title">PLAYLIST EXPLORER</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <!--
+                <a class="mdl-navigation__link" href="">Home</a>
+                <a class="mdl-navigation__link" href="">About</a>
+                -->
+            </nav>
         </div>
-      </header>
+    </header>
 
-      
-      <main class="mdl-layout__content">
-
+    <!-- PAGE CONTENT -->
+    <main class="mdl-layout__content">
         <div class='page-content'>
 
-          <!-- Headline  -->
-          <div class="headline">
-              <h1>IMPORT YOUR FAVORITE PLAYLIST</h1>
-              <hr>
-          </div>
-
-
-          <!-- Log In Portal  -->
-          <div class="spotify-connect">
-
-            <!-- Not Yet Connected  -->
-            <div id="login">
-              <a href="/login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">LOG IN WITH SPOTIFY</a>
+            <!-- IMPORT PLAYLIST Headline  -->
+            <div class="headline">
+                <h1>IMPORT YOUR FAVORITE PLAYLIST</h1>
+                <hr>
             </div>
 
 
-            <!-- Connected  -->
-            <div id="loggedin">
+            <!-- Log In Portal  -->
+            <div class="spotify-connect">
 
-              <div id="user-profile"></div>
-                <span class=important-buttons>
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="get-playlists">MY PLAYLISTS</button>
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="obtain-new-token">REFRESH SPOTIFY ACCESS</button>
+                <!-- Not Yet Connected  -->
+                <div id="login">
+                    <a href="/login"
+                       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">LOG
+                        IN WITH SPOTIFY</a>
+                </div>
+
+
+                <!-- Connected  -->
+                <div id="loggedin">
+
+                    <div id="user-profile"></div>
+                    <span class=important-buttons>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                          id="get-playlists">MY PLAYLISTS</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                          id="obtain-new-token">REFRESH SPOTIFY ACCESS</button>
                 </span>
 
-              <div id="user-playlists">
-              </div>
+                    <!-- User playlists -->
+                    <div id="user-playlists">
+                    </div>
 
-              <a id="analyze-1"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="#playlist-viz">ANALYZE</a>
-            
-            </div>
+                    <!-- Analyse 1 button -->
+                    <a id="analyze-1"
+                       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                       href="#playlist-viz">ANALYZE</a>
+
+                </div>
 
 
-            <script id="user-playlist-embedding-template" type="text/x-handlebars-template">
-              <div class="spotify-playlist">
+                <!-- User playlist container template -->
+                <script id="user-playlist-embedding-template" type="text/x-handlebars-template">
+                    <div class="spotify-playlist">
                 <span class="mdl-chip">
                   <span class="mdl-chip__text">{{name}}</span>
                   <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-{{toggle_nb}}">
-                    <input type="checkbox" id="toggle-{{toggle_nb}}" class="mdl-switch__input" unchecked>
+                    <input type="checkbox" id="toggle-{{toggle_nb}}" class="mdl-switch__input">
                     <span class="mdl-switch__label"></span>
                   </label>
                 </span>
 
-                <div class="spotify-content">
-                    <iframe src="https://open.spotify.com/embed/playlist/{{id}}" width="220" height="200" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                </div>
-              </div>
-            </script>
+                        <div class="spotify-content">
+                            <iframe src="https://open.spotify.com/embed/playlist/{{id}}" width="220" height="200"
+                                    allowtransparency="true" allow="encrypted-media"></iframe>
+                        </div>
+                    </div>
+                </script>
 
-            <script id="user-profile-template" type="text/x-handlebars-template">
-              <h2>Welcome {{display_name}} !</h2>
-            </script>
+                <!-- User profile container template -->
+                <script id="user-profile-template" type="text/x-handlebars-template">
+                    <h2>Welcome {{display_name}} !</h2>
+                </script>
 
-          </div>
+            </div>
 
-          <!-- Headline  -->
-          <div class="headline">
-            <h1> OR CHOOSE AMONG THE MOST POPULAR ONES</h1>
-            <hr>
-          </div>
+            <!-- POPULAR PLAYLISTS Headline  -->
+            <div class="headline">
+                <h1> OR CHOOSE AMONG THE MOST POPULAR ONES</h1>
+                <hr>
+            </div>
 
-          <!-- FIRST PLAYLIST ROW -->
+            <!-- FIRST PLAYLIST ROW -->
 
-          <div id="playlist-row">
+            <div class="playlist-row">
 
-            <!-- One Playlist Element  -->
-            <div class="spotify-playlist">
+                <!-- One Playlist Element  -->
+                <div class="spotify-playlist">
 
-              <!-- Basic Chip -->
-              <span class="mdl-chip">
+                    <!-- Basic Chip -->
+                    <span class="mdl-chip">
                 <span class="mdl-chip__text">&nbsp Rock &nbsp &nbsp</span>
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-                  <input type="checkbox" id="switch-1" class="mdl-switch__input" unchecked>
+                  <input type="checkbox" id="switch-1" class="mdl-switch__input">
                   <span class="mdl-switch__label"></span>
                 </label>
               </span>
 
-              <div class="spotify-content">
-                  <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWXRqgorJj26U" width="220" height="400" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-              </div>
-            </div>
+                    <div class="spotify-content">
+                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWXRqgorJj26U" width="220"
+                                height="400" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                </div>
 
-            <!-- One Playlist Element  -->
-            <div class="spotify-playlist">
+                <!-- One Playlist Element  -->
+                <div class="spotify-playlist">
 
-              <!-- Basic Chip -->
-              <span class="mdl-chip">
-                <span class="mdl-chip__text"> &nbsp Musique Classique &nbsp &nbsp</span>
+                    <!-- Basic Chip -->
+                    <span class="mdl-chip">
+                <span class="mdl-chip__text"> &nbsp Classical Music &nbsp &nbsp</span>
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2">
-                  <input type="checkbox" id="switch-2" class="mdl-switch__input" unchecked>
+                  <input type="checkbox" id="switch-2" class="mdl-switch__input">
                   <span class="mdl-switch__label"></span>
                 </label>
               </span>
 
-              <div class="spotify-content">
-                  <iframe src="https://open.spotify.com/embed/playlist/3P6fMeN40WHk1nuKMjhOXH" width="220" height="400" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-              </div>
-            </div>
+                    <div class="spotify-content">
+                        <iframe src="https://open.spotify.com/embed/playlist/3P6fMeN40WHk1nuKMjhOXH" width="220"
+                                height="400" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                </div>
 
-            <!-- One Playlist Element  -->
-            <div class="spotify-playlist">
+                <!-- One Playlist Element  -->
+                <div class="spotify-playlist">
 
-              <!-- Basic Chip -->
-              <span class="mdl-chip">
+                    <!-- Basic Chip -->
+                    <span class="mdl-chip">
                 <span class="mdl-chip__text">&nbsp R&B &nbsp &nbsp</span>
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-3">
-                  <input type="checkbox" id="switch-3" class="mdl-switch__input" unchecked>
+                  <input type="checkbox" id="switch-3" class="mdl-switch__input">
                   <span class="mdl-switch__label"></span>
                 </label>
               </span>
 
-              <div class="spotify-content">
-                  <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXch2nNxu927l" width="220" height="400" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-              </div>
-            </div>
+                    <div class="spotify-content">
+                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXch2nNxu927l" width="220"
+                                height="400" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                </div>
 
-            <!-- One Playlist Element  -->
-            <div class="spotify-playlist">
+                <!-- One Playlist Element  -->
+                <div class="spotify-playlist">
 
-              <!-- Basic Chip -->
-              <span class="mdl-chip">
+                    <!-- Basic Chip -->
+                    <span class="mdl-chip">
                 <span class="mdl-chip__text"> &nbsp Jazz &nbsp &nbsp</span>
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-4">
-                  <input type="checkbox" id="switch-4" class="mdl-switch__input" unchecked>
+                  <input type="checkbox" id="switch-4" class="mdl-switch__input">
                   <span class="mdl-switch__label"></span>
                 </label>
               </span>
 
-              <div class="spotify-content">
-                  <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXbITWG1ZJKYt" width="220" height="400" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-              </div>
+                    <div class="spotify-content">
+                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXbITWG1ZJKYt" width="220"
+                                height="400" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                </div>
             </div>
-          </div>
 
-          <!-- SECOND PLAYLIST ROW -->
+            <!-- SECOND PLAYLIST ROW -->
 
-          <div id="playlist-row">
+            <div class="playlist-row">
 
-            <!-- One Playlist Element  -->
-            <div class="spotify-playlist">
-    
-              <!-- Basic Chip -->
-              <span class="mdl-chip">
+                <!-- One Playlist Element  -->
+                <div class="spotify-playlist">
+
+                    <!-- Basic Chip -->
+                    <span class="mdl-chip">
                 <span class="mdl-chip__text">&nbsp Afro Music &nbsp &nbsp</span>
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-5">
-                  <input type="checkbox" id="switch-5" class="mdl-switch__input" unchecked>
+                  <input type="checkbox" id="switch-5" class="mdl-switch__input">
                   <span class="mdl-switch__label"></span>
                 </label>
               </span>
 
-              <div class="spotify-content">
-                  <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWX0o6sD1a6P5" width="220" height="400" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-              </div>
-            </div>
+                    <div class="spotify-content">
+                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWX0o6sD1a6P5" width="220"
+                                height="400" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                </div>
 
-            <!-- One Playlist Element  -->
-            <div class="spotify-playlist">
+                <!-- One Playlist Element  -->
+                <div class="spotify-playlist">
 
-              <!-- Basic Chip -->
-              <span class="mdl-chip">
+                    <!-- Basic Chip -->
+                    <span class="mdl-chip">
                 <span class="mdl-chip__text">&nbsp K-POP &nbsp &nbsp</span>
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-6">
-                  <input type="checkbox" id="switch-6" class="mdl-switch__input" unchecked>
+                  <input type="checkbox" id="switch-6" class="mdl-switch__input">
                   <span class="mdl-switch__label"></span>
                 </label>
               </span>
 
-              <div class="spotify-content">
-                  <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4RDXswvP6Mj" width="220" height="400" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-              </div>
-            </div>
+                    <div class="spotify-content">
+                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4RDXswvP6Mj" width="220"
+                                height="400" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                </div>
 
-            <!-- One Playlist Element  -->
-            <div class="spotify-playlist">
+                <!-- One Playlist Element  -->
+                <div class="spotify-playlist">
 
-              <!-- Basic Chip -->
-              <span class="mdl-chip">
+                    <!-- Basic Chip -->
+                    <span class="mdl-chip">
                 <span class="mdl-chip__text">&nbsp 80's &nbsp &nbsp</span>
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-7">
-                  <input type="checkbox" id="switch-7" class="mdl-switch__input" unchecked>
+                  <input type="checkbox" id="switch-7" class="mdl-switch__input">
                   <span class="mdl-switch__label"></span>
                 </label>
               </span>
 
-              <div class="spotify-content">
-                  <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWl7MndYYxge" width="220" height="400" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-              </div>
-            </div>
+                    <div class="spotify-content">
+                        <iframe class="playlist-frame"
+                                src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWl7MndYYxge" width="220"
+                                height="400" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                </div>
 
-            <!-- One Playlist Element  -->
-            <div class="spotify-playlist">
+                <!-- One Playlist Element  -->
+                <div class="spotify-playlist">
 
-              <!-- Basic Chip -->
-              <span class="mdl-chip">
+                    <!-- Basic Chip -->
+                    <span class="mdl-chip">
                 <span class="mdl-chip__text">&nbsp Metal &nbsp &nbsp</span>
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-8">
-                  <input type="checkbox" id="switch-8" class="mdl-switch__input" unchecked>
+                  <input type="checkbox" id="switch-8" class="mdl-switch__input">
                   <span class="mdl-switch__label"></span>
                 </label>
               </span>
 
-              <div class="spotify-content">
-                  <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWTcqUzwhNmKv" width="220" height="400" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-              </div>
-            </div>      
-          </div>
+                    <div class="spotify-content">
+                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWTcqUzwhNmKv" width="220"
+                                height="400" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                </div>
+            </div>
 
-          <div class='centered-container'>
-            <a id="analyze-2" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="#playlist-viz" >ANALYZE</a>
-          </div>
-
-
-          <!-- PLAYLIST VIZUALISATION -->
-          <div id="playlist-viz">
-            <h1> PLAYLIST VIZUALISATION</h1>
-            <hr>
-
-            <select id="x-select-button"></select>
-            <select id="y-select-button"></select>
-
-            <!-- PLAYLIST VIZ -->
-            <div id="scatter-plot" height=200 width=450> 
+            <!-- ANALYSE BUTTON (2) -->
+            <div class='centered-container'>
+                <a id="analyze-2"
+                   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                   href="#playlist-viz">ANALYZE</a>
             </div>
 
 
+            <!-- PLAYLIST VISUALIZATION -->
+            <div id="playlist-viz">
+                <h1> PLAYLIST VISUALIZATION</h1>
+                <hr>
+
+                <!-- SCATTER PLOT VISUALIZATION  -->
+                <div>
+                    <!-- PARAMETER SELECTION -->
+                    <label for="x-select-button">Select x axis:</label>
+                    <select id="x-select-button"></select>
+                    <label for="y-select-button">Select y axis:</label>
+                    <select id="y-select-button"></select>
+
+                    <!-- SCATTER PLOT  -->
+                    <div id="scatter-plot"></div>
+                </div>
+            </div>
         </div>
+    </main>
 
-      </main>
+</div>
 
-          <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
-          <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-          <script src="js/spotify-communication.js"></script>
-          <script src="js/scatterPlot.js"> </script>  
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="js/spotify-communication.js"></script>
+<script src="js/scatterPlot.js"></script>
 
-
-
-    </div>
-  </body>
+</body>
 </html>
 
