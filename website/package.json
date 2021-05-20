@@ -1,0 +1,18 @@
+{
+    "name": "SpotifyPlaylist",
+    "description": "Simple spotify playlist analysis app",
+    "version": "0.0.2",
+    "private": true,
+    "license": "MIT",
+    "author": "KCS",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "querystring": "^0.2.1",
+        "request": "^2.88.2"
+    }
+}

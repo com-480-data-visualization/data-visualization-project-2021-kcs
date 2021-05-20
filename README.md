@@ -8,6 +8,8 @@
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
+[Website](./website/README.md)
+
 ## Milestone 1 (23rd April, 5pm)
 
 ### Dataset
@@ -207,3 +209,9 @@ Here is a list of related works and sources of inspiration we found:
 - [Spotify user profile analysis](https://obscurifymusic.com/)
 - [Spotify user's top tracks and genres visualisation](https://lsouth.github.io/spotify-visualization)
 - [Interactive historical map of music](https://musicmap.info/)
+
+
+## Milestone 2
+
+See [Milestone2 pdf report](./Report%20Milestone%202.pdf)
+
