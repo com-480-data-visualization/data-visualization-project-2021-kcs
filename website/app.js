@@ -12,9 +12,9 @@ const cors = require('cors');
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
 
-// Update these vairables with your Spotify API client id and secret / redirect url.
+// Update these variables with your Spotify API client id and secret / redirect url.
 const client_id = '9ff70be148084897a0bcdc2faf02e4e6'; // Your client id
-const client_secret = 'API_SECRET'; // Your secret
+const client_secret = process.env.SPOTIFY_SECRET; // Your secret
 const redirect_uri = 'http://localhost:8000/callback/'; // Your redirect uri
 
 /**
