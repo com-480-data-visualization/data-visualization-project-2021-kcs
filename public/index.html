@@ -33,7 +33,6 @@
 <!-- Always shows a header, even in smaller screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
-
     <!-- PAGE TOP BAR HEADER -->
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
@@ -139,10 +138,8 @@
                 <!-- SCATTER PLOT VISUALIZATION  -->
                 <div class="scatter-viz">
                     <!-- PARAMETER SELECTION -->
-                    <label for="x-select-button">Select x axis:</label>
-                    <select id="x-select-button"></select>
-                    <label for="y-select-button">Select y axis:</label>
-                    <select id="y-select-button"></select>
+                    <label for="feature-select-button">Select features:</label>
+                    <select id="feature-select-button" multiple></select>
                     <br>
                     <svg id="scatter-plot-legend" height=200 width=450></svg>
                   

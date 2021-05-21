@@ -12,6 +12,8 @@ const cors = require('cors');
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
 
+require('dotenv').config();
+
 // Update these variables with your Spotify API client id and secret / redirect url.
 const client_id = '9ff70be148084897a0bcdc2faf02e4e6'; // Your client id
 const client_secret = process.env.SPOTIFY_SECRET; // Your secret
