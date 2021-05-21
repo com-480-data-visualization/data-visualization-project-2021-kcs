@@ -200,5 +200,31 @@ $(document).ajaxStop(function () {
         update(x_axis, y_axis);
     })
 
+    // Add legend
+    document.getElementById("scatter-plot-legend").innerHTML = "";
+    let legend = d3.select("#scatter-plot-legend");
+
+
+    legend.selectAll("legendDots")
+        .data(user_data)
+        .enter()
+        .append("circle")
+        .attr("cx", 100)
+        .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+        .attr("r", 7)
+        .style("fill", function(d){ return color(d.color)});
+
+// Add one dot in the legend for each name.
+    legend.selectAll("legendLabels")
+        .data(user_data)
+        .enter()
+        .append("text")
+        .attr("x", 120)
+        .attr("y", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+        .style("fill", function(d){ return color(d.color)})
+        .text(function(d){ return d.playlist_name})
+        .attr("text-anchor", "left")
+        .style("alignment-baseline", "middle")
+
 
 });
