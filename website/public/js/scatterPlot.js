@@ -158,7 +158,7 @@ $(document).ajaxStop(function () {
 
             dots.enter().append("circle")
                 .style("fill", function () {
-                    return color(pl_data.nb)
+                    return color(pl_data.color)
                 })
                 .style("stroke", "white")
                 .style("stroke-width", 1)
