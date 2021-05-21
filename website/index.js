@@ -14,7 +14,7 @@ const cookieParser = require('cookie-parser');
 
 // Update these vairables with your Spotify API client id and secret / redirect url.
 const client_id = '9ff70be148084897a0bcdc2faf02e4e6'; // Your client id
-const client_secret = 'c0102623bf47426ea23aa1e9e1f98f32'; // Your secret
+const client_secret = 'API_SECRET'; // Your secret
 const redirect_uri = 'http://localhost:8000/callback/'; // Your redirect uri
 
 /**

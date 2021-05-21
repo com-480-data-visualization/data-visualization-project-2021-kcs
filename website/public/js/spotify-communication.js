@@ -34,15 +34,22 @@
 
     // List audio features to analyse
     const audio_features = ['danceability', 'energy', 'loudness', 'mode',
-        'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo']
-
+        'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo'];
 
     // List default displayed playlists.
-    let displayed_playlists = [
-        '37i9dQZF1DWXRqgorJj26U', '3P6fMeN40WHk1nuKMjhOXH', '37i9dQZF1DXch2nNxu927l', '37i9dQZF1DXbITWG1ZJKYt',
-        '37i9dQZF1DWX0o6sD1a6P5', '37i9dQZF1DX4RDXswvP6Mj', '37i9dQZF1DWWl7MndYYxge', '37i9dQZF1DWTcqUzwhNmKv'];
-    let defaultPlaylistsEmbeddingPlaceholder = document.getElementById('default-playlists')
+    let default_playlists = [
+        {id: '37i9dQZF1DWXRqgorJj26U', name: 'Rock'},
+        {id: '3P6fMeN40WHk1nuKMjhOXH', name: 'Classical Music'},
+        {id: '37i9dQZF1DXch2nNxu927l', name: 'R&B'},
+        {id: '37i9dQZF1DXbITWG1ZJKYt', name: 'Jazz'},
+        {id: '37i9dQZF1DWX0o6sD1a6P5', name: 'Afro Music'},
+        {id: '37i9dQZF1DX4RDXswvP6Mj', name: 'K-POP'},
+        {id: '37i9dQZF1DWWl7MndYYxge', name: '80\'s'},
+        {id: '37i9dQZF1DWTcqUzwhNmKv', name: 'Metal'}
+    ];
+    let defaultPlaylistsEmbeddingPlaceholder = document.getElementById('default-playlists');
     // Display the default playlists.
+    display_playlists(defaultPlaylistsEmbeddingPlaceholder, default_playlists);
 
     let all_playlists = [], selected_playlists = [];
 
@@ -85,17 +92,16 @@
         for (let i = 0; i < playlists.length; i++) {
             placeholder.innerHTML += playlistEmbeddingTemplate({
                 id: playlists[i].id,
-                name: playlists[i].name,
-                toggle_nb: i
+                name: playlists[i].name
             });
         }
     }
 
     function show_visualization() {
         visualizationBlock.style.display = "block";
-        setTimeout(function() {
+        setTimeout(function () {
             visualizationBlock.scrollIntoView({behavior: "smooth"});
-            }, 300);
+        }, 300);
 
     }
 
@@ -144,7 +150,7 @@
 
         for (let i = 0; i < all_playlists.length; i++) {
 
-            let toggle_name = '#toggle-' + i;
+            let toggle_name = '#toggle-' + all_playlists[i].id;
 
             if ($(toggle_name).is(':checked')) {
 
@@ -201,16 +207,16 @@
 
     document.getElementById('analyze-2').addEventListener('click', function () {
 
-        for (let i = 0; i < displayed_playlists.length; i++) {     //change 8 to variable
+        for (let i = 0; i < default_playlists.length; i++) {     //change 8 to variable
 
-            let toggle_name = '#switch-' + i;
+            let toggle_name = '#toggle-' + default_playlists[i].id;
             let id_number = 0;
 
             if ($(toggle_name).is(':checked')) {
 
                 let playlist_data = {};
                 let track_ids = [];
-                let playlist_id = displayed_playlists[i];
+                let playlist_id = default_playlists[i].id;
 
                 console.log(toggle_name);
 
