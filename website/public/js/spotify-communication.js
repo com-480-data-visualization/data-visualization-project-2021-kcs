@@ -47,11 +47,13 @@
         {id: '37i9dQZF1DWWl7MndYYxge', name: '80\'s'},
         {id: '37i9dQZF1DWTcqUzwhNmKv', name: 'Metal'}
     ];
+    // Display the default playlists
     let defaultPlaylistsEmbeddingPlaceholder = document.getElementById('default-playlists');
-    // Display the default playlists.
     display_playlists(defaultPlaylistsEmbeddingPlaceholder, default_playlists);
 
-    let all_playlists = [], selected_playlists = [];
+    let user_playlists = [];
+
+    let all_playlists = [];
 
     // Hide visualization block by default
     let visualizationBlock = document.getElementById('playlist-viz');
@@ -89,6 +91,7 @@
 
 
     function display_playlists(placeholder, playlists) {
+        placeholder.innerHTML = "";
         for (let i = 0; i < playlists.length; i++) {
             placeholder.innerHTML += playlistEmbeddingTemplate({
                 id: playlists[i].id,
@@ -125,10 +128,10 @@
                 'Authorization': 'Bearer ' + access_token
             },
             success: function (response) {
-                display_playlists(playlistEmbeddingPlaceholder, response.items);
-                all_playlists = response.items;
-                console.log("User playlists:");
-                console.log(all_playlists);
+
+                user_playlists = response.items;
+                display_playlists(playlistEmbeddingPlaceholder, user_playlists);
+
             }
         });
     }, false);
@@ -157,7 +160,6 @@
                 let playlist_data = {};
                 let track_ids = [];
 
-                selected_playlists.push(all_playlists[i]);
                 console.log(toggle_name);
 
                 $.ajax({
