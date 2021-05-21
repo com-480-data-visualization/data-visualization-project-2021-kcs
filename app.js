@@ -15,9 +15,9 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 // Update these variables with your Spotify API client id and secret / redirect url.
-const client_id = '9ff70be148084897a0bcdc2faf02e4e6'; // Your client id
+const client_id = process.env.SPOTIFY_CLIENT_ID; // Your client id
 const client_secret = process.env.SPOTIFY_SECRET; // Your secret
-const redirect_uri = 'http://localhost:8000/callback/'; // Your redirect uri
+const redirect_uri = `http://${process.env.HOST}:${process.env.PORT}/callback/`; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
