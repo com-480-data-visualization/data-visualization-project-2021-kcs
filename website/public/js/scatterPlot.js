@@ -154,7 +154,7 @@ $(document).ajaxStop(function () {
         user_data.forEach(function (pl_data) {
             // Add circles
             let dots = SVG.selectAll("circle")
-                .data(d3.zip(pl_data[x_axis], pl_data[y_axis], pl_data['tracknames']));
+                .data(d3.zip(pl_data[x_axis], pl_data[y_axis], pl_data['track_names']));
 
             dots.enter().append("circle")
                 .style("fill", function () {

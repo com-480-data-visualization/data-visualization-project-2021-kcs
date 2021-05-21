@@ -47,6 +47,8 @@
         {id: '37i9dQZF1DWWl7MndYYxge', name: '80\'s'},
         {id: '37i9dQZF1DWTcqUzwhNmKv', name: 'Metal'}
     ];
+
+
     // Display the default playlists
     let defaultPlaylistsEmbeddingPlaceholder = document.getElementById('default-playlists');
     display_playlists(defaultPlaylistsEmbeddingPlaceholder, default_playlists);
@@ -59,16 +61,18 @@
     let visualizationBlock = document.getElementById('playlist-viz');
     visualizationBlock.style.display = "none";
 
+    let headers;
+
     if (error) {
         alert('There was an error during the authentication');
     } else {
         if (access_token) {
 
+            headers = {'Authorization': 'Bearer ' + access_token};
+
             $.ajax({
                 url: 'https://api.spotify.com/v1/me',
-                headers: {
-                    'Authorization': 'Bearer ' + access_token
-                },
+                headers: headers,
                 success: function (response) {
                     userProfilePlaceholder.innerHTML = userProfileTemplate(response);
 
@@ -84,6 +88,8 @@
             // Get app token
             if (!app_access_token) {
                 window.location.href = '/anonymous';
+            } else {
+                headers = {'Authorization': 'Bearer ' + app_access_token};
             }
 
         }
@@ -124,9 +130,7 @@
     document.getElementById('get-playlists').addEventListener('click', function () {
         $.ajax({
             url: "https://api.spotify.com/v1/me/playlists?limit=8&offset=0",
-            headers: {
-                'Authorization': 'Bearer ' + access_token
-            },
+            headers: headers,
             success: function (response) {
 
                 user_playlists = response.items;
@@ -136,143 +140,72 @@
         });
     }, false);
 
-    function set_playlist_data_audio_features(playlist_data, response) {
-        console.log("Audio features:");
-        console.log(response);
-
-        for (const f of audio_features) {
-            playlist_data[f] = response.audio_features.map(a => a[f])
-        }
-    }
 
 
-    document.getElementById('analyze-1').addEventListener('click', function () {
-
+    document.getElementById('analyze').addEventListener('click', function () {
+        // Reset user_data array
         user_data = [];
-        let id_number = 0;
+        let color_id = 0;
 
+        // Merge user and default playlists
+        all_playlists = user_playlists.concat(default_playlists);
+
+        console.log(all_playlists);
+
+        // For each playlist in the array
         for (let i = 0; i < all_playlists.length; i++) {
+            let playlist_toggle_id = '#toggle-' + all_playlists[i].id;
 
-            let toggle_name = '#toggle-' + all_playlists[i].id;
+            // If the playlist have been selected
+            if ($(playlist_toggle_id).is(':checked')) {
+                let playlist_data = {}; //Object containing all playlist data for visualisation.
 
-            if ($(toggle_name).is(':checked')) {
-
-                let playlist_data = {};
-                let track_ids = [];
-
-                console.log(toggle_name);
-
+                // Get the tracks data from the given playlist
                 $.ajax({
-                    url: all_playlists[i].tracks.href,
-                    headers: {'Authorization': 'Bearer ' + access_token},
+                    url: `https://api.spotify.com/v1/playlists/${all_playlists[i].id}/tracks`,
+                    headers: headers,
                     success: function (response) {
+                        color_id++; // Increment color
+                        let playlist_tracks = response.items.map(a => a.track);
 
-                        let result = response.items.map(a => a.track);
-                        id_number++;
-
-                        playlist_data.nb = id_number;
+                        // Add playlist track data to data object from plot
+                        playlist_data.color = color_id;
                         playlist_data.playlist_name = all_playlists[i].name;
-                        playlist_data.tracknames = result.map(a => a.name);
-                        playlist_data.popularity = result.map(a => a.popularity);
-                        playlist_data.duration = result.map(a => a.duration_ms);
-
-                        track_ids = result.map(a => a.id);
-
+                        playlist_data.track_names = playlist_tracks.map(t => t.name);
+                        playlist_data.popularity = playlist_tracks.map(t => t.popularity);
+                        playlist_data.duration = playlist_tracks.map(t => t.duration_ms);
+                        playlist_data.track_ids = playlist_tracks.map(t => t.id);
                     },
                     complete: function () {
-
-                        track_string = track_ids.slice(0, Math.min(track_ids.length, 100)).join();
-
+                        // Build audio-features query from the first 100 tracks' id.
+                        const tracks_100 = playlist_data.track_ids.slice(0,
+                            Math.min(playlist_data.track_ids.length, 100)).join();
+                        // Get the audio-features for the first 100 tracks
                         $.ajax({
-                            url: "https://api.spotify.com/v1/audio-features?ids=" + track_string,
-                            headers: {'Authorization': 'Bearer ' + access_token},
+                            url: `https://api.spotify.com/v1/audio-features?ids=${tracks_100}`,
+                            headers: headers,
                             success: function (response) {
-                                set_playlist_data_audio_features(playlist_data, response);
+                                // Add audio features to the playlist data
+                                for (const f of audio_features) {
+                                    playlist_data[f] = response.audio_features.map(a => a[f])
+                                }
+                                // Add user_data object (create in html, carries data into scatter plot).
                                 user_data.push(playlist_data);
-                                // Show visualization
+                                // Display and scroll to visualisation block
                                 show_visualization();
                             },
-                            complete: function () {
+                        })
 
-                                console.log(user_data);
-
-
-                            }
-                        });
                     }
-                });
+
+                })
 
             }
         }
-    }, false);
 
+        console.log('User data:');
+        console.log(user_data);
 
-    document.getElementById('analyze-2').addEventListener('click', function () {
-
-        for (let i = 0; i < default_playlists.length; i++) {     //change 8 to variable
-
-            let toggle_name = '#toggle-' + default_playlists[i].id;
-            let id_number = 0;
-
-            if ($(toggle_name).is(':checked')) {
-
-                let playlist_data = {};
-                let track_ids = [];
-                let playlist_id = default_playlists[i].id;
-
-                console.log(toggle_name);
-
-                let token;
-
-                if (access_token) {
-                    token = access_token
-                } else {
-                    token = app_access_token
-                }
-
-                $.ajax({
-                    url: 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks',
-                    headers: {'Authorization': 'Bearer ' + token},
-                    success: function (response) {
-
-                        id_number++;
-                        let result = response.items.map(a => a.track);
-
-                        playlist_data.nb = id_number;
-                        playlist_data.playlist_name = 'To be implemented';
-                        playlist_data.tracknames = result.map(a => a.name);
-                        playlist_data.popularity = result.map(a => a.popularity);
-                        playlist_data.duration = result.map(a => a.duration_ms);
-
-                        track_ids = result.map(a => a.id);
-
-                    },
-                    complete: function () {
-
-                        let track_string = track_ids.slice(0, Math.min(track_ids.length, 100)).join();
-
-                        $.ajax({
-                            url: "https://api.spotify.com/v1/audio-features?ids=" + track_string,
-                            headers: {'Authorization': 'Bearer ' + token},
-                            success: function (response) {
-                                set_playlist_data_audio_features(playlist_data, response);
-                                website_data.push(playlist_data);
-                                user_data.push(playlist_data);
-                                show_visualization()
-
-                            },
-                            complete: function () {
-
-                                console.log(website_data);
-
-                            }
-                        });
-                    }
-                });
-
-            }
-        }
-    }, false);
-
+    })
 
 })();
