@@ -17,7 +17,8 @@ require('dotenv').config();
 // Update these variables with your Spotify API client id and secret / redirect url.
 const client_id = process.env.SPOTIFY_CLIENT_ID; // Your client id
 const client_secret = process.env.SPOTIFY_SECRET; // Your secret
-const redirect_uri = `http://${process.env.HOST}:${process.env.PORT}/callback/`; // Your redirect uri
+// Don't forget to put `https://playlist-alchemy.herokuapp.com/callback` for production
+const redirect_uri = `http://${process.env.HOST}:${process.env.PORT}/callback/`
 
 /**
  * Generates a random string containing numbers and letters
