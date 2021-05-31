@@ -28,6 +28,7 @@ function add_scatter_plot(x_feature, y_feature) {
   var vlSpec = {
     $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
     data: plot_data,
+    params: [{name: 'brush', select: 'interval'}],
     mark: 'point',
     encoding: {
       y: {
@@ -45,8 +46,8 @@ function add_scatter_plot(x_feature, y_feature) {
         }
       },
       color: {
-        field: 'name',
-        type: 'nominal'
+        condition: {param: 'brush', field: 'name', type: 'nominal'},
+        value: 'grey'
       }
     }
   }
