@@ -1,21 +1,22 @@
-// Wait for data to be imported from the server
+// Artists Graph d3 Visualisation
+
+//Credits to:
+// -- https://bl.ocks.org/heybignick/3faf257bbbbc7743bb72310d03b86ee8
+// -- https://bl.ocks.org/pkerpedjiev/f2e6ebb2532dae603de13f0606563f5b
+// - Graph with hover: https://bl.ocks.org/almsuarez/4333a12d2531d6c1f6f22b74f2c57102
+// - Add/remove nodes: https://bl.ocks.org/sgcc/7ad094c9acd1877785ee39cde67eb6c7
 
 // TODO: Add  $(document).ajaxStop( ) wrapper and remove example data
 (function () {
-
-    // Create of Map of songs
-
-    //Sources:
-
-    // https://bl.ocks.org/heybignick/3faf257bbbbc7743bb72310d03b86ee8
-    //
 
     graph_data = [
         {
             "playlist_color": 1,
             "playlist_name": "R&B",
             "tracks": [
-                {
+
+                /**
+                 {
                     "artists": [
                         {
                             "id": "1YfEcTuGvBQ8xSD1f53UnK",
@@ -33,7 +34,7 @@
                     "id": "0YImOCkIJ2PWhCXaURCZnY",
                     "name": "I Know What You Want (feat. Flipmode Squad)"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "21E3waRsmPlU7jZsS13rcj",
@@ -43,7 +44,7 @@
                     "id": "6CFPFnS9EcLs2I0nWqtWci",
                     "name": "Because Of You"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "27FGXRNruFoOdf1vP8dqcH",
@@ -53,7 +54,7 @@
                     "id": "4v5kAh2wWyCSuKuhMJK8u6",
                     "name": "Long Way 2 Go"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "2JyWXPbkqI5ZJa3gwqVa0c",
@@ -63,7 +64,7 @@
                     "id": "0gPQTLaqHDgdupKEok7J2x",
                     "name": "7 Days"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "2gBjLmx6zQnFGQJCAQpRgw",
@@ -77,7 +78,7 @@
                     "id": "4nthV2eZAXnt4yiJMocLkG",
                     "name": "Dilemma"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "6vWDO969PvNqNYHIOW5v0m",
@@ -91,7 +92,7 @@
                     "id": "4WY3HyGXsWqjFRCVD6gnTe",
                     "name": "Baby Boy (feat. Sean Paul)"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "1vfezMIyCr4XUdYRaKIKi3",
@@ -105,7 +106,7 @@
                     "id": "24NPziq3dayIMKppeI94Um",
                     "name": "Last Night"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "21E3waRsmPlU7jZsS13rcj",
@@ -115,7 +116,7 @@
                     "id": "6glklpxk7EtKIdxA3kYQS5",
                     "name": "Miss Independent"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "1XkoF8ryArs86LZvFOkbyr",
@@ -125,7 +126,7 @@
                     "id": "2YegxR5As7BeQuVp2U6pek",
                     "name": "Be Without You - Kendu Mix"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "2DlGxzQSjYe5N6G9nkYghR",
@@ -143,7 +144,7 @@
                     "id": "4ZOyH6KjomjlqCz3oFqglr",
                     "name": "Jenny from the Block (feat. Jadakiss & Styles P.) - Track Masters Remix"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "1Y8cdNmUJH7yBTd9yOvr5i",
@@ -153,7 +154,7 @@
                     "id": "7H6ev70Weq6DdpZyyTmUXk",
                     "name": "Say My Name"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "20s0P9QLxGqKuCsGwFsp7w",
@@ -163,7 +164,7 @@
                     "id": "3ibKnFDaa3GhpPGlOUj7ff",
                     "name": "Let Me Love You"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "23zg3TcAtWQy7J6upgbUnj",
@@ -173,7 +174,7 @@
                     "id": "2QsZVnbWVSjKMXK6K3uRBL",
                     "name": "U Remind Me"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "4BIQA9vRkqXEnA2twmq7mU",
@@ -191,7 +192,7 @@
                     "id": "2yr2HnFYl7XvqJk4fXoQBt",
                     "name": "I Don't Wanna Know (feat. Enya & P. Diddy) - 2016 Remaster"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "0OUXTnqjvTg4iZ7Lhq6vv7",
@@ -201,7 +202,7 @@
                     "id": "2J2hVpwVV25EK8Bvd3OgCK",
                     "name": "Don't Mess With My Man"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "3ScY9CQxNLQei8Umvpx5g6",
@@ -219,7 +220,7 @@
                     "id": "2mKouqwAIdQnMP43zxR89r",
                     "name": "What's Luv? (feat. Ja-Rule & Ashanti)"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "05oH07COxkXKIMt6mIPRee",
@@ -233,7 +234,7 @@
                     "id": "6sHsXIJoEN5JpdkGMQDJxt",
                     "name": "The Boy Is Mine"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "23zg3TcAtWQy7J6upgbUnj",
@@ -247,7 +248,7 @@
                     "id": "68vgtRHr7iZHpzGpon6Jlo",
                     "name": "My Boo"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "0z4gvV4rjIZ9wHck67ucSV",
@@ -261,7 +262,7 @@
                     "id": "6NncjnSD7JLEetWb9KqMRY",
                     "name": "I Wanna Love You"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "5KNqYrivNgVCHBssEUSu5B",
@@ -275,7 +276,7 @@
                     "id": "5PMKzsUsTpZZGsCcJBuhP2",
                     "name": "U Know What's Up (feat. Lisa \"Left Eye\" Lopes)"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "0urTpYCsixqZwgNTkPJOJ4",
@@ -285,7 +286,7 @@
                     "id": "1XRP3YAk85HKboqEkCMXla",
                     "name": "Try Again"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "5NDMothbpdpq2xHqSjrrWn",
@@ -295,7 +296,7 @@
                     "id": "7MQywXGHEev7JmwwIzMcao",
                     "name": "Love Like This"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "1J2VVASYAamtQ3Bt8wGgA6",
@@ -309,7 +310,7 @@
                     "id": "3J4YoloryJCieZ9kapS1oL",
                     "name": "Always On Time"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "4iHNK0tOyZPYnBU7nGAgpQ",
@@ -319,7 +320,7 @@
                     "id": "4EI8VuxUuIHKfafU72emqz",
                     "name": "We Belong Together"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "0HCeK90YUyjWi0utTPYXw1",
@@ -333,7 +334,7 @@
                     "id": "36jSIOSE72neBbKntCthqw",
                     "name": "Addictive"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "21E3waRsmPlU7jZsS13rcj",
@@ -343,7 +344,7 @@
                     "id": "4SRqDmPxYX0pUb5B5ut2Ri",
                     "name": "So Sick"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "59wfkuBoNyhDMQGCljbUbA",
@@ -361,7 +362,7 @@
                     "id": "7lVNTXkI3cHFvcXiI8damb",
                     "name": "I Need a Girl (Pt. 1) [feat. Usher & Loon]"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "3DiDSECUqqY1AuBP8qtaIa",
@@ -371,7 +372,7 @@
                     "id": "6IwKcFdiRQZOWeYNhUiWIv",
                     "name": "No One"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "05oH07COxkXKIMt6mIPRee",
@@ -385,7 +386,7 @@
                     "id": "7rBzAkopTL4baeJGCFU7M4",
                     "name": "Another Day in Paradise - R&B-Version"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "6wPhSqRtPu1UhRCDX5yaDJ",
@@ -399,7 +400,7 @@
                     "id": "24kGngQeXHt0uhffKpq0zj",
                     "name": "Don't Cha"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "5pKCCKE2ajJHZ9KAiaK11H",
@@ -413,7 +414,7 @@
                     "id": "4789yoeBIsBi6et3z0fyly",
                     "name": "Hate That I Love You"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "5rkVyNGXEgeUqKkB5ccK83",
@@ -423,7 +424,7 @@
                     "id": "6zMUIb4uce1CzpbjR3vMdN",
                     "name": "Foolish"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "6vWDO969PvNqNYHIOW5v0m",
@@ -433,7 +434,7 @@
                     "id": "2CvOqDpQIMw69cCzWqr5yr",
                     "name": "Halo"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "31TPClRtHm23RisEBtV3X7",
@@ -443,7 +444,7 @@
                     "id": "6LtidZ09rh1n991F8qYPui",
                     "name": "What Goes Around...Comes Around - Radio Edit"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "4HgF4KnohByNElYid7iCNb",
@@ -453,7 +454,7 @@
                     "id": "4Ilen0VxPEsVRLpnePji8P",
                     "name": "Slow Down - 12\" Version"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "4eAOcbAXIF4BmbN6E1QIlw",
@@ -463,7 +464,7 @@
                     "id": "0IspqeDVLIw46spUMhOKRL",
                     "name": "When You Look At Me - Radio Edit"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "3DiDSECUqqY1AuBP8qtaIa",
@@ -473,7 +474,7 @@
                     "id": "3XVBdLihbNbxUwZosxcGuJ",
                     "name": "If I Ain't Got You"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "3nFkdlSjzX9mRTtwJOzDYB",
@@ -487,7 +488,7 @@
                     "id": "5ljCWsDlSyJ41kwqym2ORw",
                     "name": "03' Bonnie & Clyde"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "31TPClRtHm23RisEBtV3X7",
@@ -501,7 +502,7 @@
                     "id": "0gs72Zn1Nxin1kvKpo9ee5",
                     "name": "My Love"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "0TImkz4nPqjegtVSMZnMRq",
@@ -511,7 +512,7 @@
                     "id": "1KGi9sZVMeszgZOWivFpxs",
                     "name": "No Scrubs"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "5pKCCKE2ajJHZ9KAiaK11H",
@@ -521,7 +522,7 @@
                     "id": "3goSVuTt3fDYDP6kRnFwuL",
                     "name": "Take A Bow"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "6vytZ677lz4LzCrUDcDokM",
@@ -535,7 +536,7 @@
                     "id": "1BPybPVkDfUjFDvqG04l58",
                     "name": "Breathe (feat. Sean Paul) - Rap Version"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "6vWDO969PvNqNYHIOW5v0m",
@@ -545,7 +546,7 @@
                     "id": "6XsT5UGfpaFeHQf5LRIy4W",
                     "name": "Me, Myself and I"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "3DiDSECUqqY1AuBP8qtaIa",
@@ -555,7 +556,7 @@
                     "id": "3unsLiH5FXmaDWtT5Imolu",
                     "name": "Fallin'"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "7aBzpmFXB4WWpPl2F7RjBe",
@@ -569,7 +570,7 @@
                     "id": "1Ov4E4nE7E0yzeqpbhEE5g",
                     "name": "911 (feat. Mary J. Blige)"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "0iVrCROxeyon7MZUW3MfzT",
@@ -579,7 +580,7 @@
                     "id": "3ii5VBrIXJXKEVkjx1IAdP",
                     "name": "Get It On Tonite"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "4iHNK0tOyZPYnBU7nGAgpQ",
@@ -593,7 +594,7 @@
                     "id": "0iqGkQyaeryW2lVkwLgrVa",
                     "name": "Fantasy - Feat. O.D.B."
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "7bXgB6jMjp9ATFy66eO08Z",
@@ -603,7 +604,7 @@
                     "id": "7ByfFjT83MNmisdzhZ50Fv",
                     "name": "With You"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "2DlGxzQSjYe5N6G9nkYghR",
@@ -617,7 +618,7 @@
                     "id": "7rOIWUhSfjWh4E7443PYE8",
                     "name": "I'm Real - Murder Remix"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "6XpaIBNiVzIetEPCWDvAFP",
@@ -627,7 +628,7 @@
                     "id": "1ckU1EhAO0Nr73QYw24SWJ",
                     "name": "My Love Is Your Love"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "0le01dl1WllSHhjEXRl4in",
@@ -637,7 +638,7 @@
                     "id": "3c6afiysmB7OnxQzzSqRfD",
                     "name": "So Into You"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "1XkoF8ryArs86LZvFOkbyr",
@@ -647,7 +648,7 @@
                     "id": "3aw9iWUQ3VrPQltgwvN9Xu",
                     "name": "Family Affair"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "6vWDO969PvNqNYHIOW5v0m",
@@ -657,7 +658,7 @@
                     "id": "6RX5iL93VZ5fKmyvNXvF1r",
                     "name": "Irreplaceable"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "3DiDSECUqqY1AuBP8qtaIa",
@@ -667,7 +668,7 @@
                     "id": "4esOae7i4rqTbAu9o5Pxco",
                     "name": "Girl on Fire"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "360IAlyVv4PCEVjgyMZrxK",
@@ -677,7 +678,7 @@
                     "id": "5hJFhO9dvhJoDvUZZ9iWSw",
                     "name": "Adorn"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "12Kgt2eahvxNWhD5PnSUde",
@@ -687,7 +688,7 @@
                     "id": "7JKEA8xYDoFp4q0QBW2PGg",
                     "name": "Shackles (Praise You)"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "31TPClRtHm23RisEBtV3X7",
@@ -697,7 +698,7 @@
                     "id": "7Lf7oSEVdzZqTA0kEDSlS5",
                     "name": "Cry Me a River"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "7bXgB6jMjp9ATFy66eO08Z",
@@ -707,7 +708,7 @@
                     "id": "7DFnq8FYhHMCylykf6ZCxA",
                     "name": "Yo (Excuse Me Miss)"
                 },
-                {
+                 {
                     "artists": [
                         {
                             "id": "63wjoROpeh5f11Qm93UiJ1",
@@ -725,6 +726,7 @@
                     "id": "0JmGVy7IzUM27My3UuEOOZ",
                     "name": "Knock You Down"
                 },
+                 **/
                 {
                     "artists": [
                         {
@@ -1376,6 +1378,52 @@
             ]
         }
     ];
+    // Create of Map of songs
+
+    let related_artists = new Map();
+    let songs_map = build_songs_map();
+    let all_tracks_id = get_all_tracks();
+    let all_artists_id = get_all_artists();
+
+    let width, height;
+    let chartWidth, chartHeight;
+    let margin;
+    const svg = d3.select("#graph-artists").append("svg");
+    let gDraw
+    let chartLayer = svg.append("g").classed("chartLayer", true);
+    let simulation;
+
+    let data;
+
+    let color = d3.scaleOrdinal()
+        .domain([1, 2, 3, 4, 5, 6, 7, 8, 9])
+        .range(["#FF0000", "#80FF00", "#00C9FF", "#FFFB00", "#FF00F7", "#FFC500", "#00FFA2", "#8F00FF", "#0013FF"]);
+
+    main();
+
+
+
+
+    function main() {
+
+
+        let graph = build_graph();
+
+        console.log(graph);
+
+        data = {
+            nodes: graph.nodes,
+            links: graph.links
+        };
+
+        set_graph_size();
+
+
+        draw_legend()
+        draw_tracks(data);
+    }
+
+
 
 
     function build_songs_map() {
@@ -1404,115 +1452,282 @@
         return tracks
     }
 
-    function get_related_artists(artist_id) {
-        $.ajax({
-            url: `https://api.spotify.com/v1/artists/${artist_id}/related-artists`,
-            headers: headers,
-            success: function (response) {
-                return response.artists.map(a => clean_artist_data(a))
-            }
-        })
-    }
-
-    function compute_coordinates(pos, total) {
-        const rad = (pos / total) * 2 * Math.PI;
-        return {x: Math.cos(rad) * 4 * total, y: Math.sin(rad) * 4 * total}
-    }
-
-    let songs_map = build_songs_map();
-    let all_tracks_id = get_all_tracks();
-
-    let width, height;
-    let chartWidth, chartHeight;
-    let margin;
-    const svg = d3.select("#graph-artists").append("svg");
-    const chartLayer = svg.append("g").classed("chartLayer", true);
-
-    let color = d3.scaleOrdinal()
-        .domain([1, 2, 3, 4, 5, 6, 7, 8, 9])
-        .range(["#FF0000", "#80FF00", "#00C9FF", "#FFFB00", "#FF00F7", "#FFC500", "#00FFA2", "#8F00FF", "#0013FF"]);
-
-    main();
-
-    function build_nodes() {
-
-        let current_i = 0;
-        let nodes = [];
+    function get_all_artists() {
+        let artists = [];
         for (let track_id of all_tracks_id) {
-            //console.log(songs_map.get(track_id).name);
-            nodes.push({
-                label: songs_map.get(track_id).name,
-                r: 5,
-                pos: current_i,
-                color: songs_map.get(track_id).playlist_color
+            for (let artist of songs_map.get(track_id).artists) {
+                artists.push(artist.id);
+                get_related_artists(artist.id)
+            }
+        }
+        return artists
+    }
+
+    function get_legend_scale() {
+        let legend_items = graph_data.map(p => p.playlist_name);
+        let legend_colors = graph_data.map(p => p.playlist_color);
+
+        // Add artist nodes legend
+        legend_items.push('Artists');
+        legend_colors.push(8);
+
+        let scale = d3.scaleOrdinal()
+            .domain(legend_items ).range(legend_colors.map(c => color(c)));
+
+        return scale
+    }
+
+    function get_related_artists(artist_id) {
+
+        if (related_artists.has(artist_id)) {
+            return related_artists.get(artist_id)
+        } else {
+            $.ajax({
+                url: `https://api.spotify.com/v1/artists/${artist_id}/related-artists`,
+                headers: headers,
+                success: function (response) {
+                    let related = response.artists.map(a => clean_artist_data(a));
+                    related_artists.set(artist_id, related);
+                }
             });
-            current_i += 1;
+            return null
         }
 
-        return nodes
-
     }
 
-    function main() {
+    function compute_coordinates(pos, total, scale = 100) {
+        const rad = (pos / total) * 2 * Math.PI;
 
-        const data = {
-            nodes: build_nodes(),
-            links: []
-        };
+        return {x: Math.cos(rad) * scale, y: Math.sin(rad) * scale}
+    }
 
-        set_graph_size();
+    function build_node(id, label, pos_x, pos_y, color, is_artist=true,  r=4)
+    {
+        return {
+            label: label, r: r, id: id, pos_x:pos_x, pos_y:pos_y, color:color, is_artist: is_artist
+        }
+    }
 
-        console.log(data.nodes);
+    function get_artist_count() {
+        return all_tracks_id.map(i => songs_map.get(i).artists.length).reduce((a, b) => a+b, 0)
+    }
 
-        draw_tracks(data);
-        //draw_artists();
+    function build_graph() {
+
+        let track_node_pos = 0;
+        let track_nodes_level = 400;
+        let nodes = [];
+        let links = [];
+
+        // Add tracks nodes
+        for (let track_id of all_tracks_id) {
+            //console.log(songs_map.get(track_id).name);
+            let coordinates = compute_coordinates(track_node_pos, all_tracks_id.length, track_nodes_level);
+            let track_data = songs_map.get(track_id);
+            let track_node = build_node(track_id, track_data.name, coordinates.x, coordinates.y,
+                track_data.playlist_color, false);
+            nodes.push(track_node);
+
+            track_node_pos += 1;
+        }
+
+        // Compute artists
+
+        let artist_node_pos = 0;
+        const artist_nodes_level = 350;
+
+        let artist_count = get_artist_count();
+
+        for (let track_id of all_tracks_id) {
+            let track_data = songs_map.get(track_id);
+            for (let artist of track_data.artists) {
+                let artist_coordinates = compute_coordinates(artist_node_pos, artist_count, artist_nodes_level)
+                let artist_node = build_node(artist.id, artist.name, artist_coordinates.x, artist_coordinates.y, 8)
+                nodes.push(artist_node);
+
+                links.push({source: track_id, target: artist.id})
+
+                artist_node_pos +=1;
+            }
+        }
+
+        return {nodes: nodes, links: links};
+
     }
 
     function set_graph_size() {
         width = document.querySelector("#graph-artists").clientWidth;
         height = document.querySelector("#graph-artists").clientHeight;
 
-        margin = {top: 0, left: 0, bottom: 0, right: 0};
+        margin = {top: 0, left: 10, bottom: 0, right: 0};
 
         chartWidth = width - (margin.left + margin.right);
         chartHeight = height - (margin.top + margin.bottom);
 
         svg.attr("width", width).attr("height", height)
+            .attr("style", "outline: thin solid white;")
+        // Add border
         //TODO: Add back zoom
-            //.call(d3.zoom().on("zoom", function () {svg.attr("transform", d3.event.transform)}));
+        //.call(d3.zoom().on("zoom", function () {svg.attr("transform", d3.event.transform)}));
+
+
 
         chartLayer
             .attr("width", chartWidth)
             .attr("height", chartHeight)
             .attr("transform", "translate(" + [margin.left, margin.top] + ")")
+
+        gDraw = svg.append('g');
+        let zoom = d3.zoom().on('zoom', zoomed)
+        svg.call(zoom);
+
+
+        function zoomed() {
+            gDraw.attr('transform', d3.event.transform);
+        }
+
     }
 
-    function draw_tracks(data) {
-        const simulation = d3.forceSimulation()
-            .force('link', d3.forceLink().id(d => d.index))
-            .force("collide", d3.forceCollide(d => d.r + 8).iterations(16))
-            .force('center', d3.forceCenter(chartWidth/2, chartHeight/2))
-            //.force("charge", d3.forceManyBody())
-            .force("y", d3.forceY(d => compute_coordinates(d.pos, all_tracks_id.length).y))
-            .force("x", d3.forceX(d => compute_coordinates(d.pos, all_tracks_id.length).x));
+    function draw_legend() {
 
-        var node = svg.append("g")
+
+        svg.append("g")
+            .attr("class", "legendSequential")
+            .attr("transform", "translate("+(width-140)+","+(height-200)+")")
+            .style('fill', '#FFF');
+
+
+
+        var legendSequential = d3.legendColor()
+            .shapeWidth(30)
+            .orient("vertical")
+            .title("Legend:")
+            .titleWidth(100)
+            .scale(get_legend_scale());
+
+        svg.select(".legendSequential")
+            .call(legendSequential);
+    }
+
+
+    function click_node(d) {
+        console.log('Node click!');
+        console.log(d.id);
+        console.log(d.label);
+
+        if (d.is_artist) {
+            let related = get_related_artists(d.id);
+            console.log(`Related of ${d.id} are: ${related.map(a => a.name)}`);
+
+            //related_nodes = []
+
+            /**
+
+            for (let r_node of related) {
+                r_node = build_node(r_node.id, r_node.name, d.pos_x - 10 , d.pos_y - 10, 8)
+                r_node.x = d.pos_x - 10;
+                r_node.y = d.pos_y -10;
+                data.nodes.push(r_node);
+                console.log(data.nodes)
+            }
+
+             **/
+            //draw_tracks(data);
+            //simulation.restart();
+            //simulation.alpha(1);
+
+        }
+
+
+        //nodes.splice(i, 1);
+        //links = links.filter(function(l) {
+        //return l.source !== d && l.target !== d;
+        //});
+        //d3.event.stopPropagation();
+    }
+
+
+    function draw_tracks(data) {
+
+        let data_nodes = data.nodes;
+        let data_links = data.links;
+
+        simulation = d3.forceSimulation()
+            //.force("charge", d3.forceManyBody().strength(-80))
+            .force("link", d3.forceLink().id(d => d.id).strength(0).iterations(10))
+            //.force('link', d3.forceLink().id(d => d.id))
+            .force("collide", d3.forceCollide(d => d.r + 8).iterations(16))
+            .force('center', d3.forceCenter(chartWidth / 2, chartHeight / 2))
+            //.force("charge", d3.forceManyBody())
+            .force("y", d3.forceY(d => d.pos_y))
+            .force("x", d3.forceX(d => d.pos_x));
+
+        let tooltip = d3.select("body")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        let node = gDraw.append("g")
             .attr("class", "nodes")
             .selectAll("g")
-            .data(data.nodes)
-            .enter().append("g");
-
-        var circles = node.append("circle")
-            .attr("r", d => d.r)
-            .attr("fill", d =>color(d.color));
-
-        var labels = node.append("text")
-            .text(function(d) {
-                return d.label;
+            .data(data_nodes)
+            .enter().append("g")
+            .on('mousedown', d=> click_node(d))
+            .on('mouseover.tooltip', function(d) {
+                tooltip.transition()
+                    .duration(300)
+                    .style("opacity", 0.8);
+                console.log(d);
+                tooltip.html("Name: " + d.label + "<p/>Type: " + ((d.is_artist) ? "Artist" : "Track"))
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY + 10) + "px").style('color', '#000')
             })
-            .attr("fill", d =>color(d.color))
-            .attr('x', 10)
-            .attr('y', 10);
+            .on("mouseout.tooltip", function() {
+                tooltip.transition()
+                    .duration(100)
+                    .style("opacity", 0);
+            });
+
+        let link = gDraw.append("g")
+            .attr("class", "link")
+            .selectAll("line")
+            .data(data_links)
+            .enter()
+            .append("line");
+
+
+        let circles = node.append("circle")
+            .attr("r", d => d.r)
+            .attr("fill", d => color(d.color));
+
+        let labels = node.append("text")
+            .text(function (d) {
+                return d.is_artist ? null : d.label
+            })
+            .attr("fill", d => color(d.color));
+
+        labels.attr('y', d => {
+            const direction = Math.sign(d.pos_x);
+            const offset = 20;
+            return 0 //direction * offset;
+        }).attr('x', d => {
+            //const offset = labels.nodes().select(d2 => d2.id = d.id).getComputedTextLength()
+            const offset = d.label.length * 5 + 30
+            const direction = Math.sign(d.pos_x)
+            return direction * (d.pos_x < 0) ? -offset : 5
+        }).attr('transform', function (d) {
+            let angle = (Math.atan( d.pos_y/d.pos_x)) * (180) / Math.PI;
+            return `rotate(${angle})`
+        });
+
+
+        function get_diretion(d) {
+            return compute_coordinates(d.pos, all_tracks_id.length).x
+
+        }
+
+
+
 
         /*
 
@@ -1534,30 +1749,23 @@
 
         const ticked = function () {
 
-            node
-                .attr("transform", function(d) {
-                    return "translate(" + d.x + "," + d.y + ")";
-                })
-
-            /*
-
-            node.attr("cx", function (d) {
-                    return d.x;
-                })
-                .attr("cy", function (d) {
-                    return d.y;
-                });
+            node.attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            });
 
 
-             */
+            link.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
         };
 
-        simulation.nodes(data.nodes).on('tick', ticked)
+
+
+        simulation.nodes(data_nodes).on('tick', ticked)
+        simulation.force("link").links(data_links);
     }
-
-
-
-
 
 
 }()); // TODO: Remove ()
