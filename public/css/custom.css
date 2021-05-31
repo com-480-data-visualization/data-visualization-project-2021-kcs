@@ -115,14 +115,14 @@ iframe {
 
 
 
-.x-selection{
+.x-selection {
     width : 100%;
     display: inline-block;
     text-align: center;
     margin: auto auto 20px;
 }
 
-.y-selection{
+.y-selection {
     width : 100%;
     display: inline-block;
     text-align: center;
@@ -130,7 +130,10 @@ iframe {
 }
 
 
-
+#cross-correlation-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 
 

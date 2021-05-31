@@ -6,45 +6,59 @@ document.getElementById('feature-select-button').innerHTML = "";
 
 // set the dimensions and margins of the graph
 let margin = {top: 60, right: 60, bottom: 60, left: 60};
-let width = 1040 - margin.left - margin.right;
-let height = 520 - margin.top - margin.bottom;
+let width = 512 - margin.left - margin.right;
+let height = 512 - margin.top - margin.bottom;
 
 // List of groups (here I have one group per column)
 const features = ["acousticness", "danceability", "energy", "instrumentalness", "liveness", "speechiness", "valence"];
 
 function add_scatter_plot(x_feature, y_feature) {
-  // Add the SVG object to the page
-  let SVG = d3.select("#cross-correlation-grid")
-  .append("div")
-  .style("background-color", "#10171a")
-  .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform",
-      "translate(" + margin.left + "," + margin.top + ")");
+  plot_values = []
 
-  // Add X axis
-  let x = d3.scaleLinear()
-  .domain([0, 1])
-  .range([0, width]);
-  SVG.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x));
+  user_data.forEach(function (playlist_data) {
+    for (i = 0; i < playlist_data[x_feature].length; i++) {
+      plot_values.push({'x': playlist_data[x_feature][i], 'y': playlist_data[y_feature][i], 'name': playlist_data.playlist_name})
+    }
+  })
 
-  // Add Y axis
-  let y = d3.scaleLinear()
-  .domain([0, 1])
-  .range([height, 0])
-  .nice();
-  SVG.append("g")
-  .call(d3.axisLeft(y));
+  plot_data = {
+    values: plot_values
+  }
+
+  var vlSpec = {
+    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+    data: plot_data,
+    mark: 'point',
+    encoding: {
+      y: {
+        field: 'y',
+        type: 'quantitative',
+        axis: {
+          title: y_feature
+        }
+      },
+      x: {
+        field: 'x',
+        type: 'quantitative',
+        axis: {
+          title: x_feature
+        }
+      },
+      color: {
+        field: 'name',
+        type: 'nominal'
+      }
+    }
+  }
+
+  // Embed the visualization in the container with id `vis`
+  vegaEmbed(vlSpec).then(res => document.getElementById('cross-correlation-grid').append(res))
 
   // Basic Customization
-  SVG.selectAll(".tick line").attr("stroke", "white");
-  SVG.selectAll(".tick text").attr("stroke", "white").style("font-size", 10);
+  /*SVG.selectAll(".tick line").attr("stroke", "white");
+  SVG.selectAll(".tick text").attr("stroke", "white").style("font-size", 10);*/
 
-  user_data.forEach(function (pl_data) {
+  /*user_data.forEach(function (pl_data) {
     // Add circles
     let dots = SVG.selectAll("circle")
         .data(d3.zip(pl_data[x_feature], pl_data[y_feature], pl_data['track_names']));
@@ -67,9 +81,52 @@ function add_scatter_plot(x_feature, y_feature) {
             return y(d[1]);
         })
         .attr("r", 5)
-  });
+  });*/
 
-  return SVG
+  //return SVG
+}
+
+function add_histogram(feature) {
+  plot_values = []
+
+  user_data.forEach(function (playlist_data) {
+    for (i = 0; i < playlist_data[feature].length; i++) {
+      plot_values.push({'x': playlist_data[feature][i], 'name': playlist_data.playlist_name})
+    }
+  })
+
+  plot_data = {
+    values: plot_values
+  }
+
+  var vlSpec = {
+    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+    data: plot_data,
+    mark: 'bar',
+    encoding: {
+      x: {
+        bin: true,
+        field: 'x',
+        type: 'quantitative',
+        axis: {
+          title: feature
+        }
+      },
+      y: {
+        aggregate: 'count',
+        axis: {
+          title: 'Count'
+        }
+      },
+      color: {
+        field: 'name',
+        type: 'nominal'
+      }
+    }
+  }
+
+  // Embed the visualization in the container with id `vis`
+  vegaEmbed(vlSpec).then(res => document.getElementById('cross-correlation-grid').append(res))
 }
 
 // Add audio features to the button
@@ -147,8 +204,11 @@ function update(features) {
 
   for (x_feature of features) {
     for (y_feature of features) {
-      //console.log("Updating the cross-correlation chart " + x_feature.label + ' ' + y_feature.label)
-      SVG = add_scatter_plot(x_feature, y_feature)
+      if (x_feature == y_feature) {
+        add_histogram(x_feature)
+      } else {
+        add_scatter_plot(x_feature, y_feature)
+      }
     }
   }
 
