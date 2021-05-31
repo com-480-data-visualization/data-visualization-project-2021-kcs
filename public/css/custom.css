@@ -9,6 +9,33 @@ html {
     margin: auto auto;
 }
 
+/**
+
+.nodes circle {
+    stroke: green;
+    stroke-width: 0.5px;
+}
+
+#graph-artists2 {
+    height: 500px;
+    width: 960px;
+}
+
+#testSvgId {
+    height: 500px;
+    width: 960px;
+}
+
+#backgroundId {
+    height: 500px;
+    width: 960px;
+}
+**/
+
+.link line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+}
 
 .legendSequential {
     background: aqua;
