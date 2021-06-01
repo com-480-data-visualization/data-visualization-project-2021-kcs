@@ -326,14 +326,14 @@ $(document).ajaxStop(function () {
         }
 
         function click_node(d) {
-            console.log('Node click!');
-            console.log(d.id);
-            console.log(d.label);
+            //console.log('Node click!');
+            //console.log(d.id);
+            //console.log(d.label);
 
             if (d.layer === 1) {
-                let related = get_related_artists(d.id);
+                //let related = get_related_artists(d.id);
 
-                console.log(`Related of ${d.id} are: ${related.map(a => a.name)}`);
+                //console.log(`Related of ${d.id} are: ${related.map(a => a.name)}`);
             }
         }
 

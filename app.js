@@ -45,7 +45,7 @@ app.use(express.static(__dirname + '/public'))
 // Request authorization token from user login
 // See: https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
 app.get('/login', function (req, res) {
-    console.log("Login called");
+    //console.log("Login called");
 
     const state = generateRandomString(16);
     res.cookie(stateKey, state);
@@ -105,7 +105,7 @@ app.get('/callback', function (req, res) {
 
                 // use the access token to access the Spotify Web API
                 request.get(options, function (error, response, body) {
-                    console.log(body);
+                    //console.log(body);
                 });
 
                 // we can also pass the token to the browser to make requests from there
@@ -151,7 +151,7 @@ app.get('/refresh_token', function (req, res) {
 // Get the client app authorization token
 
 app.get('/anonymous', function (req, res) {
-    console.log('Called');
+    //console.log('Called');
     const authOptions = {
         url: 'https://accounts.spotify.com/api/token',
         headers: {

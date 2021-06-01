@@ -26,7 +26,7 @@
 
     // Get spotify api token parameters
     let params = getHashParams();
-    console.log(params);
+    //console.log(params);
     let access_token = params.access_token,
         refresh_token = params.refresh_token,
         error = params.error,
@@ -156,7 +156,7 @@
         // Merge user and default playlists
         all_playlists = user_playlists.concat(default_playlists);
 
-        console.log(all_playlists);
+        //console.log(all_playlists);
 
         // For each playlist in the array
         for (let i = 0; i < all_playlists.length; i++) {
@@ -180,8 +180,8 @@
                         track_graph_data.tracks = playlist_tracks.map(t => clean_track_data(t));
                         graph_data.push(track_graph_data);
 
-                        console.log('Tracks data:');
-                        console.log(graph_data);
+                        //console.log('Tracks data:');
+                        //console.log(graph_data);
 
                         // Add playlist track data to data object from plot
                         playlist_data.color = color_id;
@@ -218,8 +218,8 @@
             }
         }
 
-        console.log('User data:');
-        console.log(user_data);
+        //console.log('User data:');
+        //console.log(user_data);
 
     })
 
