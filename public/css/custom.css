@@ -9,34 +9,15 @@ html {
     margin: auto auto 200px;
 }
 
-/**
-
-.nodes circle {
-    stroke: green;
-    stroke-width: 0.5px;
-}
-
-#graph-artists2 {
-    height: 500px;
-    width: 960px;
-}
-
-#testSvgId {
-    height: 500px;
-    width: 960px;
-}
-
-#backgroundId {
-    height: 500px;
-    width: 960px;
-}
-**/
-
 .link line {
     stroke: #999;
-    stroke-opacity: 0.6;
+    stroke-width: 4;
 }
 
+.arc path {
+    stroke-width: 6;
+    fill: none;
+}
 .legendSequential {
     background: aqua;
 }
