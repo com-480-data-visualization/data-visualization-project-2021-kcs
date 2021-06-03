@@ -196,6 +196,7 @@ function update(features) {
         titleColor: 'white'
       },
       legend: {
+        title: null,
         labelColor: 'white',
         titleColor: 'white'
       }
