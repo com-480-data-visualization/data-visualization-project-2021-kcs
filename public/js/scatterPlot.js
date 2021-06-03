@@ -183,6 +183,8 @@ function update(features) {
     }
   }
 
+  // TODO fix scrolling which zooms selection window and plot itself at the same time
+
   vlSpec = {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     data: plot_data,
@@ -204,7 +206,17 @@ function update(features) {
     title: {
       color: 'white'
     },
-    params: [{name: 'brush', select: 'interval'}],
+    params: [{name: 'brush', select: {
+      type: 'interval', 
+      on: "[mousedown[event.shiftKey], mouseup] > mousemove",
+      translate: "[mousedown[event.shiftKey], mouseup] > mousemove!"
+    }},
+    {name: 'grid', select: {
+      type: 'interval',
+      on: "[mousedown[!event.shiftKey], mouseup] > mousemove",
+      translate: "[mousedown[!event.shiftKey], mouseup] > mousemove!"},
+      bind: 'scales'}
+    ],
     columns: features.length,
     concat: view_specs
   }
