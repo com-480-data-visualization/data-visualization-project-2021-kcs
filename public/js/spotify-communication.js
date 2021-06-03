@@ -26,7 +26,7 @@
 
     // Get spotify api token parameters
     let params = getHashParams();
-    console.log(params);
+    //console.log(params);
     let access_token = params.access_token,
         refresh_token = params.refresh_token,
         error = params.error,
@@ -60,8 +60,6 @@
     // Hide visualization block by default
     let visualizationBlock = document.getElementById('playlist-viz');
     visualizationBlock.style.display = "none";
-
-    let headers;
 
     if (error) {
         alert('There was an error during the authentication');
@@ -140,17 +138,25 @@
         });
     }, false);
 
+    function clean_track_data(track) {
+        let clean_track = {};
+        clean_track.artists = track.artists.map(a => clean_artist_data(a));
+        clean_track.id = track.id;
+        clean_track.name = track.name;
+        return clean_track
+    }
 
 
     document.getElementById('analyze').addEventListener('click', function () {
         // Reset user_data array
         user_data = [];
+        graph_data = [];
         let color_id = 0;
 
         // Merge user and default playlists
         all_playlists = user_playlists.concat(default_playlists);
 
-        console.log(all_playlists);
+        //console.log(all_playlists);
 
         // For each playlist in the array
         for (let i = 0; i < all_playlists.length; i++) {
@@ -159,6 +165,7 @@
             // If the playlist have been selected
             if ($(playlist_toggle_id).is(':checked')) {
                 let playlist_data = {}; //Object containing all playlist data for visualisation.
+                let track_graph_data = {}; //Object containing tracks data from graph visualisation
 
                 // Get the tracks data from the given playlist
                 $.ajax({
@@ -167,6 +174,14 @@
                     success: function (response) {
                         color_id++; // Increment color
                         let playlist_tracks = response.items.map(a => a.track);
+
+                        track_graph_data.playlist_color = color_id;
+                        track_graph_data.playlist_name = all_playlists[i].name;
+                        track_graph_data.tracks = playlist_tracks.map(t => clean_track_data(t));
+                        graph_data.push(track_graph_data);
+
+                        //console.log('Tracks data:');
+                        //console.log(graph_data);
 
                         // Add playlist track data to data object from plot
                         playlist_data.color = color_id;
@@ -203,8 +218,8 @@
             }
         }
 
-        console.log('User data:');
-        console.log(user_data);
+        //console.log('User data:');
+        //console.log(user_data);
 
     })
 

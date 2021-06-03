@@ -26,8 +26,14 @@
 
 
 <script>
+    let headers;
     let user_data = [];
     let website_data = [];
+    let graph_data = [];
+
+    let clean_artist_data = function ({id, name}) {
+        return {id, name};
+    };
 </script>
 
 <!-- Always shows a header, even in smaller screens. -->
@@ -53,6 +59,7 @@
     <!-- PAGE CONTENT -->
     <main class="mdl-layout__content">
         <div class='page-content'>
+
 
             <!-- IMPORT PLAYLIST Headline  -->
             <div class="headline">
@@ -124,6 +131,7 @@
 
             <!-- ANALYSE BUTTON -->
             <div class='centered-container'>
+
                 <a id="analyze"
                    class="mdl-button mdl-js-button mdl-button--raised
                    mdl-js-ripple-effect mdl-button--accent">ANALYZE</a>
@@ -145,6 +153,68 @@
 
                     <div id="cross-correlation-grid"></div>
                 </div>
+
+
+                <div id="graph-viz">
+                    <h1>ARTISTS GRAPH VISUALIZATION</h1>
+                    <hr>
+                    <div class='centered-container'>
+
+                        <span id="button-arcs" class="mdl-chip">
+                         <span class="mdl-chip__text">Display Arcs</span>
+                         <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-arcs">
+                             <input type="checkbox" id="toggle-arcs" class="mdl-switch__input">
+                             <span class="mdl-switch__label"></span>
+                        </label>
+                     </span>
+
+                        <span id="button-related" class="mdl-chip">
+                         <span class="mdl-chip__text">Display Related Artists</span>
+                         <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-related">
+                             <input type="checkbox" id="toggle-related" class="mdl-switch__input">
+                             <span class="mdl-switch__label"></span>
+                        </label>
+                     </span>
+
+                        <span id="button-texts" class="mdl-chip">
+                         <span class="mdl-chip__text">Display Artists Name</span>
+                         <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-texts">
+                             <input type="checkbox" id="toggle-texts" class="mdl-switch__input">
+                             <span class="mdl-switch__label"></span>
+                        </label>
+                     </span>
+                        <span id="button-force" class="mdl-chip">
+                         <span class="mdl-chip__text">Force Links</span>
+                         <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-force">
+                             <input type="checkbox" id="toggle-force" class="mdl-switch__input">
+                             <span class="mdl-switch__label"></span>
+                        </label>
+                     </span>
+
+                        <span id="button-legend" class="mdl-chip">
+                         <span class="mdl-chip__text">Show Legend</span>
+                         <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-legend">
+                             <input type="checkbox" id="toggle-legend" class="mdl-switch__input" checked>
+                             <span class="mdl-switch__label"></span>
+                        </label>
+                     </span>
+
+                        <span id="button-tooltip" class="mdl-chip">
+                         <span class="mdl-chip__text">Show Tooltip</span>
+                         <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-tooltip">
+                             <input type="checkbox" id="toggle-tooltip" class="mdl-switch__input">
+                             <span class="mdl-switch__label"></span>
+                        </label>
+                     </span>
+
+
+
+
+
+                    </div>
+                    <div id="graph-artists"></div>
+
+                </div>
             </div>
         </div>
     </main>
@@ -154,7 +224,11 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="js/spotify-communication.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="js/scatterPlot.js"></script>
+<script src="js/artists-graph.js"></script>
+
 
 </body>
 </html>
