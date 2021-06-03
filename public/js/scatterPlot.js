@@ -13,47 +13,31 @@ let height = 512 - margin.top - margin.bottom;
 const features = ["acousticness", "danceability", "energy", "instrumentalness", "liveness", "speechiness", "valence"];
 
 function add_scatter_plot(x_feature, y_feature) {
-  plot_values = []
-
-  user_data.forEach(function (playlist_data) {
-    for (i = 0; i < playlist_data[x_feature].length; i++) {
-      plot_values.push({'x': playlist_data[x_feature][i], 'y': playlist_data[y_feature][i], 'name': playlist_data.playlist_name})
-    }
-  })
-
-  plot_data = {
-    values: plot_values
-  }
-
   var vlSpec = {
-    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-    data: plot_data,
-    params: [{name: 'brush', select: 'interval'}],
     mark: 'point',
     encoding: {
       y: {
-        field: 'y',
+        field: y_feature,
         type: 'quantitative',
         axis: {
           title: y_feature
         }
       },
       x: {
-        field: 'x',
+        field: x_feature,
         type: 'quantitative',
         axis: {
           title: x_feature
         }
       },
       color: {
-        condition: {param: 'brush', field: 'name', type: 'nominal'},
-        value: 'grey'
+        condition: {param: 'brush', field: 'playlist_name', type: 'ordinal'},
+        value: "grey"
       }
     }
   }
 
-  // Embed the visualization in the container with id `vis`
-  vegaEmbed(vlSpec).then(res => document.getElementById('cross-correlation-grid').append(res))
+  return vlSpec
 
   // Basic Customization
   /*SVG.selectAll(".tick line").attr("stroke", "white");
@@ -88,26 +72,15 @@ function add_scatter_plot(x_feature, y_feature) {
 }
 
 function add_histogram(feature) {
-  plot_values = []
-
-  user_data.forEach(function (playlist_data) {
-    for (i = 0; i < playlist_data[feature].length; i++) {
-      plot_values.push({'x': playlist_data[feature][i], 'name': playlist_data.playlist_name})
-    }
-  })
-
-  plot_data = {
-    values: plot_values
-  }
-
   var vlSpec = {
-    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-    data: plot_data,
     mark: 'bar',
+    transform: [
+      {filter: {param: 'brush'}}
+    ],
     encoding: {
       x: {
         bin: true,
-        field: 'x',
+        field: feature,
         type: 'quantitative',
         axis: {
           title: feature
@@ -120,14 +93,13 @@ function add_histogram(feature) {
         }
       },
       color: {
-        field: 'name',
+        field: 'playlist_name',
         type: 'nominal'
       }
     }
   }
 
-  // Embed the visualization in the container with id `vis`
-  vegaEmbed(vlSpec).then(res => document.getElementById('cross-correlation-grid').append(res))
+  return vlSpec
 }
 
 // Add audio features to the button
@@ -142,26 +114,6 @@ d3.select("#feature-select-button")
     .attr("value", function (d) {
         return d;
     }); // corresponding value returned by the button
-
-// Add X axis label:
-    /*SVG.append("text")
-        .attr('id', 'xLabel')
-        .attr("text-anchor", "end")
-        .attr("x", width)
-        .attr("y", height + margin.top)
-        .text("ACOUSTICNESS")
-        .style("fill", "white");*/
-
-// Y axis label:
-    /*SVG.append("text")
-        .attr('id', 'yLabel')
-        .attr("text-anchor", "end")
-        .attr("transform", "rotate(-90)")
-        .attr("y", -margin.left + 10)
-        .attr("x", -margin.top)
-        .text("DANCEABILITY")
-        .style("fill", "white");*/
-
 
 // Tooltip 
 let tooltip = d3.select("#scatter-plot")
@@ -203,25 +155,58 @@ let color = d3.scaleOrdinal()
 function update(features) {
   document.getElementById('cross-correlation-grid').innerHTML = "";
 
+  plot_values = []
+
+  user_data.forEach(function (playlist_data) {
+    for (i = 0; i < playlist_data[features[0]].length; i++) {
+      track = {'track_name': playlist_data['track_names'][i], 'playlist_name': playlist_data.playlist_name}
+      for (feature of features) {
+        track[feature] = playlist_data[feature][i]
+      }
+      plot_values.push(track)
+    }
+  })
+
+  plot_data = {
+    values: plot_values
+  }
+
+  view_specs = []
+
   for (x_feature of features) {
     for (y_feature of features) {
       if (x_feature == y_feature) {
-        add_histogram(x_feature)
+        view_specs.push(add_histogram(x_feature))
       } else {
-        add_scatter_plot(x_feature, y_feature)
+        view_specs.push(add_scatter_plot(x_feature, y_feature))
       }
     }
   }
 
-  /*d3.select('#xLabel')
-      .transition()
-      .duration(1000)
-      .text(x_axis.toUpperCase());
+  vlSpec = {
+    $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    data: plot_data,
+    background: null,
+    axis: {
+      domainColor: 'white',
+      gridColor: 'white',
+      labelColor: 'white',
+      tickColor: 'white',
+      titleColor: 'white'
+    },
+    legend: {
+      labelColor: 'white',
+      titleColor: 'white'
+    },
+    title: {
+      color: 'white'
+    },
+    params: [{name: 'brush', select: 'interval'}],
+    columns: features.length,
+    concat: view_specs
+  }
 
-  d3.select('#yLabel')
-      .transition()
-      .duration(1000)
-      .text(y_axis.toUpperCase());*/
+  vegaEmbed(vlSpec, {actions: false}).then(res => document.getElementById('cross-correlation-grid').append(res))
 }
 
 update(['acousticness', 'danceability']);
@@ -236,28 +221,4 @@ d3.select("#feature-select-button").on("change", function () {
     update(features);
 });
 
-// Add legend
-document.getElementById("scatter-plot-legend").innerHTML = "";
-let legend = d3.select("#scatter-plot-legend");
-
-legend.selectAll("legendDots")
-    .data(user_data)
-    .enter()
-    .append("circle")
-    .attr("cx", 100)
-    .attr("cy", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-    .attr("r", 7)
-    .style("fill", function(d){ return color(d.color)});
-
-// Add one dot in the legend for each name.
-legend.selectAll("legendLabels")
-    .data(user_data)
-    .enter()
-    .append("text")
-    .attr("x", 120)
-    .attr("y", function(d,i){ return 100 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
-    .style("fill", function(d){ return color(d.color)})
-    .text(function(d){ return d.playlist_name})
-    .attr("text-anchor", "left")
-    .style("alignment-baseline", "middle")
-});
+})
