@@ -1,11 +1,9 @@
 // Artists Graph d3 Visualisation
 
 //Credits to:
-// -- https://bl.ocks.org/heybignick/3faf257bbbbc7743bb72310d03b86ee8
-// -- https://bl.ocks.org/pkerpedjiev/f2e6ebb2532dae603de13f0606563f5b
 // - Graph with hover: https://bl.ocks.org/almsuarez/4333a12d2531d6c1f6f22b74f2c57102
 // - Add/remove nodes: https://bl.ocks.org/sgcc/7ad094c9acd1877785ee39cde67eb6c7
-// Shortest path: https://stackoverflow.com/questions/32527026/shortest-path-in-javascript
+// - Shortest path algorithm: https://stackoverflow.com/questions/32527026/shortest-path-in-javascript
 
 
 let zoomScale = 1;
@@ -510,7 +508,17 @@ $(document).ajaxStop(function () {
             // Add node labels
             let labels = node.append("text")
                 .text(function (d) {
-                    return displayArtistText || d.layer === 0 ? d.label : null;
+
+                    if (displayForce) {
+                        return ""
+                    }
+
+                    if (d.layer === 0) {
+                        return d.label
+                    }
+
+                    return displayArtistText ? d.label : "";
+
                     //return d.layer > 0 ? null : d.label
                 })
                 .attr("font-size", zoomScale + 'px')
@@ -594,7 +602,11 @@ $(document).ajaxStop(function () {
 
                 if (displayArcs) {
                     link.style('stroke-opacity', 0);
-                    node.style('fill-opacity', d => d.layer === 0? 1 : 0)
+
+                    node.filter(function(d) {
+                        if (d.layer === 1) {
+                            return this
+                        }}).style('fill-opacity', 0)
                 }
 
             }
