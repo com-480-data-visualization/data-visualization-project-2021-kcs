@@ -9,7 +9,7 @@ html {
     margin: auto auto;
 }
 
-.graph-artists {
+#graph-artists {
     width: 1000px;
     height: 700px;
     margin: auto auto 200px;

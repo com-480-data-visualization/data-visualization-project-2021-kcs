@@ -119,13 +119,15 @@ let tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
+// Global variables
+let related_artists = new Map();
+let artists_id_to_name = new Map();
+const linkedByIndex = {};
+
 // Wait for graph-data and related artists data are loaded
 $(document).ajaxStop(function () {
 
-        // Prepare data to build graph
-        let related_artists = new Map();
-        let artists_id_to_name = new Map();
-        const linkedByIndex = {};
+        // Graph viz global variables
         let g = new Graph();
 
         let songs_map = build_songs_map();
@@ -513,7 +515,7 @@ $(document).ajaxStop(function () {
 
             let forceLink = d3.forceLink().id(d => d.id).iterations(10);
             if (!displayForce) {
-                forceLink = forceLink.strength(0).distance(50);
+                forceLink = forceLink.strength(0).distance(200);
             }
 
             simulation = d3.forceSimulation()
