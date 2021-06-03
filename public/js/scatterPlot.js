@@ -187,16 +187,18 @@ function update(features) {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     data: plot_data,
     background: null,
-    axis: {
-      domainColor: 'white',
-      gridColor: 'white',
-      labelColor: 'white',
-      tickColor: 'white',
-      titleColor: 'white'
-    },
-    legend: {
-      labelColor: 'white',
-      titleColor: 'white'
+    config: {
+      axis: {
+        domainColor: 'white',
+        gridColor: 'white',
+        labelColor: 'white',
+        tickColor: 'white',
+        titleColor: 'white'
+      },
+      legend: {
+        labelColor: 'white',
+        titleColor: 'white'
+      }
     },
     title: {
       color: 'white'
