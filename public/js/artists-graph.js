@@ -6,11 +6,11 @@
 // - Shortest path algorithm: https://stackoverflow.com/questions/32527026/shortest-path-in-javascript
 
 
+//
 let zoomScale = 1;
+const PATH_LENGTH_THRESHOLD = 2; // Filter the arcs path value to improve loading time.
 
-const PATH_LENGTH_THRESHOLD = 2;
-
-
+// Settings values
 let displayArcs = false;
 let displayRelated = false;
 let displayArtistText = false;
@@ -18,7 +18,10 @@ let displayForce = false;
 let displayLegend = true;
 let displayTooltip = false;
 
-
+/**
+ * Disable settings button
+ * @param name
+ */
 function disable_button(name) {
     let span = $(`#button-${name}`);
     let toggle = $(`#toggle-${name}`);
@@ -29,6 +32,10 @@ function disable_button(name) {
     toggle.removeProp('checked');
 }
 
+/**
+ * Enable settings button
+ * @param name
+ */
 function enable_button(name) {
 
     let span = $(`#button-${name}`);
@@ -102,28 +109,30 @@ $("#toggle-arcs").click(() => {
     $.ajax() // update graph
 });
 
+// Playlists colors
 let color = d3.scaleOrdinal()
     .domain([1, 2, 3, 4, 5, 6, 7, 8, 9])
     .range(["#FF0000", "#80FF00", "#00C9FF", "#FFFB00", "#FF00F7", "#FFC500", "#00FFA2", "#8F00FF", "#0013FF"]);
 
-// Add tooltip to page
+// Tooltip
 let tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-
-let related_artists = new Map();
-let artists_id_to_name = new Map();
-const linkedByIndex = {};
-
+// Wait for graph-data and related artists data are loaded
 $(document).ajaxStop(function () {
 
+        // Prepare data to build graph
+        let related_artists = new Map();
+        let artists_id_to_name = new Map();
+        const linkedByIndex = {};
         let g = new Graph();
 
         let songs_map = build_songs_map();
         let all_tracks_id = get_all_tracks();
         let all_artists_id = get_all_artists();
 
+        // Create variables for d3 viz
         let width, height;
         let chartWidth, chartHeight;
         let margin;
@@ -133,10 +142,12 @@ $(document).ajaxStop(function () {
         let simulation;
         let data;
 
-        /** Reset graph **/
-
+        // Run graph viz
         main();
 
+        /**
+         * Graph d3 visualization
+         */
         function main() {
 
             let graph = build_graph();
@@ -160,6 +171,10 @@ $(document).ajaxStop(function () {
             }
         }
 
+        /**
+         * Return all artists ids
+         * @returns {Set<String>} artists id
+         */
         function get_all_artists() {
             let artists_id = new Set();
             for (let track_id of all_tracks_id) {
@@ -174,6 +189,10 @@ $(document).ajaxStop(function () {
             return artists_id;
         }
 
+        /**
+         * Build map of track id to track data
+         * @returns {Map<String, Object>}
+         */
         function build_songs_map() {
             let songs = new Map();
 
@@ -189,6 +208,11 @@ $(document).ajaxStop(function () {
             return songs
         }
 
+
+        /**
+         * Get all the tracks from selected playlists
+         * @returns {[]} list of tracks
+         */
         function get_all_tracks() {
             let tracks = [];
             for (let playlist of graph_data) {
@@ -199,6 +223,10 @@ $(document).ajaxStop(function () {
             return tracks
         }
 
+        /**
+         * Return scale with playlists and artist node color
+         * @returns {*}
+         */
         function get_legend_scale() {
             let legend_items = graph_data.map(p => p.playlist_name);
             let legend_colors = graph_data.map(p => p.playlist_color);
@@ -211,6 +239,11 @@ $(document).ajaxStop(function () {
                 .domain(legend_items).range(legend_colors.map(c => color(c)))
         }
 
+        /**
+         * Given an artist id, get the list of related artists
+         * @param artist_id
+         * @returns {null|[]} null if require ajax request, list of artist id otherwise
+         */
         function get_related_artists(artist_id) {
 
             if (related_artists.has(artist_id)) {
@@ -229,22 +262,50 @@ $(document).ajaxStop(function () {
 
         }
 
+        /**
+         * Convert radial index to x, y coordinates. an index (pos), total number of points on circle (total) and a radius scale (scale) return the equivalent x, y coordinates
+         * @param pos Index for the node
+         * @param total total number of points on circle
+         * @param scale radius scale
+         * @returns {{x: number, y: number}}
+         */
         function compute_coordinates(pos, total, scale = 1) {
             const rad = (pos / total) * 2 * Math.PI;
 
             return {x: Math.cos(rad) * scale, y: Math.sin(rad) * scale}
         }
 
+        /**
+         * Build a node object for the graph
+         * @param id
+         * @param label
+         * @param pos_x
+         * @param pos_y
+         * @param color
+         * @param layer (0: tracks, 1: artists, 2: related artists)
+         * @param r radius
+         * @returns {{pos_y: *, r: number, pos_x: *, color: *, label: *, id: *, layer: number}}
+         */
         function build_node(id, label, pos_x, pos_y, color, layer = 0, r = 10) {
             return {
                 label: label, r: r, id: id, pos_x: pos_x, pos_y: pos_y, color: color, layer: layer
             }
         }
 
+        /**
+         * Return true if nodes a and b are directly connected
+         * @param a
+         * @param b
+         * @returns {*|boolean}
+         */
         function isConnected(a, b) {
             return linkedByIndex[`${a.id},${b.id}`] || linkedByIndex[`${b.id},${a.id}`] || a.id === b.id;
         }
 
+        /**
+         * Build nodes and links from playlist tracks and artists
+         * @returns {{nodes: [], links: [], arcs: []}}
+         */
         function build_graph() {
 
 
@@ -376,7 +437,7 @@ $(document).ajaxStop(function () {
 
                         // Add links
                         for (let a_id of l1_links.get(r_id)) {
-                            links.push({source: a_id, target: r_id, layer:1})
+                            links.push({source: a_id, target: r_id, layer: 1})
                         }
                     }
 
@@ -388,12 +449,9 @@ $(document).ajaxStop(function () {
 
         }
 
-        function clean_graph(graph) {
-            new_nodes = [];
-            new_links = [];
-
-        }
-
+        /**
+         * Set d3 graph visualization  size
+         */
         function set_graph_size() {
             width = document.querySelector("#graph-artists").clientWidth;
             height = document.querySelector("#graph-artists").clientHeight;
@@ -422,6 +480,9 @@ $(document).ajaxStop(function () {
 
         }
 
+        /**
+         * Draw the legend element on the visualization
+         */
         function draw_legend() {
 
 
@@ -443,6 +504,10 @@ $(document).ajaxStop(function () {
         }
 
 
+        /**
+         * Draw the nodes, Links, Arcs, Labels
+         * @param data
+         */
         function draw_tracks(data) {
 
 
@@ -555,8 +620,11 @@ $(document).ajaxStop(function () {
                 .attr('stroke', d => d3.schemeCategory20[d.color]);
 
 
-
-
+            /**
+             * Find tracks that at distance 1 from another track
+             * @param d
+             * @returns {Set<unknown>}
+             */
             function find_connected_nodes(d) {
 
                 let connected_nodes = new Set();
@@ -582,6 +650,9 @@ $(document).ajaxStop(function () {
                 return connected_nodes
             }
 
+            /**
+             * Change graph display from settings display button value
+             */
             function settings_display() {
                 if (displayForce) {
                     labels.style('fill-opacity', 0);
@@ -590,27 +661,65 @@ $(document).ajaxStop(function () {
 
                 if (!displayRelated) {
 
-                    node.filter(function(d) {
+                    node.filter(function (d) {
                         if (d.layer === 2) {
                             return this
-                        }}).style('fill-opacity', 0 );
-                    link.filter(function(d) {
+                        }
+                    }).style('fill-opacity', 0);
+                    link.filter(function (d) {
                         if (d.layer === 1) {
                             return this
-                        }}).style('stroke-opacity',  0);
+                        }
+                    }).style('stroke-opacity', 0);
                 }
 
                 if (displayArcs) {
                     link.style('stroke-opacity', 0);
 
-                    node.filter(function(d) {
+                    node.filter(function (d) {
                         if (d.layer === 1) {
                             return this
-                        }}).style('fill-opacity', 0)
+                        }
+                    }).style('fill-opacity', 0)
                 }
 
             }
 
+            /**
+             * Find nodes that connects two track at artist distance of 1.
+             * @param d
+             * @returns {Set<unknown>}
+             */
+            function find_connected_nodes(d) {
+
+                let connected_nodes = new Set();
+                connected_nodes.add(d);
+
+                // Find distance 1 nodes and links
+                for (let n of data.nodes) {
+                    if (isConnected(d, n)) {
+                        connected_nodes.add(n)
+                    }
+                }
+
+                // Find distance 2 tracks
+                for (let c of connected_nodes) {
+                    if (c.layer === 1) {
+                        for (let t of data.nodes) {
+                            if (isConnected(c, t) && t.layer === 0 && !connected_nodes.has(t)) {
+                                connected_nodes.add(t)
+                            }
+                        }
+                    }
+                }
+                return connected_nodes
+            }
+
+            /**
+             * Find the links that connects two track at artist distance of 1.
+             * @param connected_nodes
+             * @returns {Set<unknown>}
+             */
             function find_connected_links(connected_nodes) {
                 let connected_links = new Set();
                 // Add connected links
@@ -626,6 +735,11 @@ $(document).ajaxStop(function () {
             }
 
 
+            /**
+             * Change the opacity of an element when user has mouse on node
+             * @param opacity
+             * @returns {function(...[*]=)}
+             */
             function fade(opacity) {
                 return d => {
 
@@ -648,13 +762,16 @@ $(document).ajaxStop(function () {
                     });
 
                     link.style('stroke-opacity', o => (connected_links_set.has(o) ? 1 : opacity));
-                    arcs.style('stroke-opacity', o => o.source.id === d.id || o.target.id === d.id ? 1 : opacity)
+                    arcs.style('stroke-opacity', o => o.source.id === d.id || o.target.id === d.id ? 1 : opacity);
 
                     settings_display()
 
                 };
             }
 
+            /**
+             * Update svg elements after simulation updates
+             */
             const ticked = function () {
 
                 node.attr("transform", function (d) {
@@ -684,6 +801,7 @@ $(document).ajaxStop(function () {
                 });
             };
 
+            // Apply simulation
             simulation.nodes(data.nodes).on('tick', ticked);
             simulation.force("link").links(data.links);
             settings_display()
@@ -695,6 +813,11 @@ $(document).ajaxStop(function () {
 );
 
 
+/**
+ * Store artists and tracks in graph object to compute paths for Arcs display
+ * @returns {Graph}
+ * @constructor
+ */
 function Graph() {
 
     let neighbors = this.neighbors = {}; // Key = vertex, value = array of neighbors.
@@ -713,6 +836,13 @@ function Graph() {
     return this;
 }
 
+/**
+ * Given a graph and two nodes, compute the shortest path between them.
+ * @param graph
+ * @param source
+ * @param target
+ * @returns {number}
+ */
 function shortestPath(graph, source, target) {
     if (source === target) {
         return 0; // We do not want to build arcs for same node

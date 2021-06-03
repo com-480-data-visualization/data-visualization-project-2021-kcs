@@ -3,7 +3,13 @@ html {
     scroll-behavior: smooth;
 }
 
-#graph-artists {
+.p-text {
+    width: 80%;
+    text-align: center;
+    margin: auto auto;
+}
+
+.graph-artists {
     width: 1000px;
     height: 700px;
     margin: auto auto 200px;
@@ -36,7 +42,7 @@ div.tooltip {
 }
 
 text {
-    font-family: sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 body {
