@@ -110,9 +110,7 @@ $("#toggle-arcs").click(() => {
 });
 
 // Playlists colors
-let color = d3.scaleOrdinal()
-    .domain([1, 2, 3, 4, 5, 6, 7, 8, 9])
-    .range(["#FF0000", "#80FF00", "#00C9FF", "#FFFB00", "#FF00F7", "#FFC500", "#00FFA2", "#8F00FF", "#0013FF"]);
+let color = d3.scaleOrdinal(d3.schemeCategory10);
 
 // Tooltip
 let tooltip = d3.select("body").append("div")
@@ -376,7 +374,7 @@ $(document).ajaxStop(function () {
                     let artist_coordinates = compute_coordinates(artist_node_pos, all_artists_id.size, global_scale * layer_1_scale);
                     //TODO Change nodes color
                     let artist_node = build_node(artist_id, artists_id_to_name.get(artist_id),
-                        artist_coordinates.x, artist_coordinates.y, 8, 1, Math.log(global_scale) * 3);
+                        artist_coordinates.x, artist_coordinates.y, 8, 1, Math.log(global_scale) * 4);
 
                     nodes.push(artist_node);
                     artist_node_pos += 1;
@@ -606,6 +604,8 @@ $(document).ajaxStop(function () {
             // Add arcs
             const curve = d3.line().curve(d3.curveCardinal);
 
+            const arcs_color = d3.schemeGreens[4];
+
             let arcs = gDraw.append("g")
                 .attr("class", "arc")
                 .selectAll("path")
@@ -619,38 +619,7 @@ $(document).ajaxStop(function () {
 
                     return curve([[s.x, s.y], [(s.x + t.x) / 4, (s.y + t.y) / 4], [t.x, t.y]])
                 })
-                .attr('stroke', d => d3.schemeCategory20[d.color]);
-
-
-            /**
-             * Find tracks that at distance 1 from another track
-             * @param d
-             * @returns {Set<unknown>}
-             */
-            function find_connected_nodes(d) {
-
-                let connected_nodes = new Set();
-                connected_nodes.add(d);
-
-                // Find distance 1 nodes and links
-                for (let n of data.nodes) {
-                    if (isConnected(d, n)) {
-                        connected_nodes.add(n)
-                    }
-                }
-
-                // Find distance 2 tracks
-                for (let c of connected_nodes) {
-                    if (c.layer === 1) {
-                        for (let t of data.nodes) {
-                            if (isConnected(c, t) && t.layer === 0 && !connected_nodes.has(t)) {
-                                connected_nodes.add(t)
-                            }
-                        }
-                    }
-                }
-                return connected_nodes
-            }
+                .attr('stroke', d => arcs_color[d.color*2]);
 
             /**
              * Change graph display from settings display button value
