@@ -177,6 +177,7 @@ app.get('/anonymous', function (req, res) {
                     app_access_token: app_access_token
                 }));
         } else {
+            console.log(error);
             res.redirect('/#' +
                 querystring.stringify({
                     error: 'invalid_app_token'

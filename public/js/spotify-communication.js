@@ -62,7 +62,8 @@
     visualizationBlock.style.display = "none";
 
     if (error) {
-        alert('There was an error during the authentication');
+        alert('Error during the authentication');
+        console.log(error)
     } else {
         if (access_token) {
 
