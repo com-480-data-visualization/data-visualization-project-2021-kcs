@@ -3,6 +3,48 @@ html {
     scroll-behavior: smooth;
 }
 
+.p-text {
+    width: 80%;
+    text-align: center;
+    margin: auto auto;
+}
+
+#graph-artists {
+    width: 1000px;
+    height: 700px;
+    margin: auto auto 200px;
+}
+
+.link line {
+    stroke: #999;
+    stroke-width: 4;
+}
+
+.arc path {
+    stroke-width: 6;
+    fill: none;
+}
+.legendSequential {
+    background: aqua;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    max-width: 200px;
+    height: auto;
+    padding: 20px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+text {
+    font-family: "Roboto", sans-serif;
+}
+
 body {
     background-color: #10171a;
     font-family: 'Roboto', sans-serif;

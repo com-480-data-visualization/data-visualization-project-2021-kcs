@@ -30,8 +30,15 @@
 
 
 <script>
+    let headers;
     let user_data = [];
-    let website_data = [];
+    let graph_data = [];
+
+    let clean_artist_data = function ({id, name}) {
+        return {id, name};
+    };
+
+
 </script>
 
 <!-- Always shows a header, even in smaller screens. -->
@@ -44,10 +51,16 @@
             <span class="mdl-layout-title">PLAYLIST EXPLORER</span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
+
             <!-- Navigation. We hide it in small screens. -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
+
+
+                <a id="playlists_header" class="mdl-navigation__link">Playlists</a>
+                <a id="audio_features_header" class="mdl-navigation__link">Audio features</a>
+                <a id="artists_graph_header" class="mdl-navigation__link">Artists graph</a>
+
                 <!--
-                <a class="mdl-navigation__link" href="">Home</a>
                 <a class="mdl-navigation__link" href="">About</a>
                 -->
             </nav>
@@ -58,8 +71,25 @@
     <main class="mdl-layout__content">
         <div class='page-content'>
 
+            <div id="main_headline" class="headline">
+                <h1>PLAYLIST EXPLORER</h1>
+                <hr>
+
+                <p class="p-text">
+                    Beneath the surface, playlists are a stranger beast than one might expect. <br>
+                    It is quite common for a user-made playlist to include tracks from different albums,
+                    different artists, even different genres!
+
+                    The playlist explorer helps you diving deep into your playlist and understand your tastes, or
+                    discover new artists.
+                </p>
+
+            </div>
+
+
             <!-- IMPORT PLAYLIST Headline  -->
-            <div class="headline">
+            <div id="playlists_headline" class="headline">
+                <hr>
                 <h1>IMPORT YOUR FAVORITE PLAYLIST</h1>
                 <hr>
             </div>
@@ -69,6 +99,10 @@
 
                 <!-- Not Yet Connected  -->
                 <div id="login">
+
+                    <p class="p-text">Connect your Spotify account via Spotify API to analyse your own playlists.</p>
+                    <br>
+
                     <a href="/login"
                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">LOGIN
                         WITH SPOTIFY</a>
@@ -119,8 +153,14 @@
 
             <!-- POPULAR PLAYLISTS Headline  -->
             <div class="headline">
+                <hr>
                 <h1> OR CHOOSE AMONG THE MOST POPULAR ONES</h1>
                 <hr>
+
+                <p class="p-text">
+                    You don't have a Spotify account or do not want to connect, that's ok! <br> Explore some of the most
+                    famous playlists!
+                </p>
             </div>
 
             <!-- DEFAULT PLAYLISTS -->
@@ -128,15 +168,17 @@
 
             <!-- ANALYSE BUTTON -->
             <div class='centered-container'>
+
                 <a id="analyze"
                    class="mdl-button mdl-js-button mdl-button--raised
                    mdl-js-ripple-effect mdl-button--accent">ANALYZE</a>
             </div>
 
 
-            <!-- PLAYLIST VISUALIZATION -->
+            <!-- AUDIO FEATURES VISUALIZATION -->
             <div id="playlist-viz">
-                <h1> PLAYLIST VISUALIZATION</h1>
+                <hr>
+                <h1 id="audio_features_headline"> AUDIO FEATURES VISUALIZATION</h1>
                 <hr>
 
                 <!-- SCATTER PLOT VISUALIZATION  -->
@@ -149,6 +191,82 @@
 
                     <div id="cross-correlation-grid"></div>
                 </div>
+
+
+                <div id="graph-viz">
+                    <hr>
+                    <h1 id="artists_graph_headline">ARTISTS GRAPH VISUALIZATION</h1>
+                    <hr>
+
+                    <p class="p-text">
+                        Let's explore the relationship between the artists in our playlist(s). <br>
+                        What are the most connected track?
+                        Does two playlists share related artists or tracks?
+                        How homogeneous or heterogeneous is a playlist? <br>
+                        Navigate the graph, move your mouse on the nodes and track names to highlight the links.
+                        Use the Arcs setting to observe internal and external playlists connections.
+                    </p>
+
+                    <!-- Settings -->
+                    <div class="centered-container">
+                        <span id="button-arcs" class="mdl-chip">
+                         <span class="mdl-chip__text">Arcs</span>
+                         <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-arcs">
+                             <input type="checkbox" id="toggle-arcs" class="mdl-switch__input">
+                             <span class="mdl-switch__label"></span>
+                        </label>
+
+                     </span>
+
+                        <span id="button-related" class="mdl-chip">
+                         <span class="mdl-chip__text">Related Artists</span>
+                         <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-related">
+                             <input type="checkbox" id="toggle-related" class="mdl-switch__input">
+                             <span class="mdl-switch__label"></span>
+                        </label>
+                     </span>
+
+                        <span id="button-force" class="mdl-chip">
+                         <span class="mdl-chip__text">Force Links</span>
+                         <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-force">
+                             <input type="checkbox" id="toggle-force" class="mdl-switch__input">
+                             <span class="mdl-switch__label"></span>
+                        </label>
+                     </span>
+                    </div>
+
+                    <div class='centered-container'>
+
+                        <span id="button-texts" class="mdl-chip">
+                            <span class="mdl-chip__text">Show Artists Name</span>
+                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-texts">
+                                <input type="checkbox" id="toggle-texts" class="mdl-switch__input">
+                                <span class="mdl-switch__label"></span>
+                            </label>
+                        </span>
+
+                        <span id="button-legend" class="mdl-chip">
+                            <span class="mdl-chip__text">Show Legend</span>
+                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-legend">
+                                <input type="checkbox" id="toggle-legend" class="mdl-switch__input" checked>
+                                <span class="mdl-switch__label"></span>
+                            </label>
+                        </span>
+
+                        <span id="button-tooltip" class="mdl-chip">
+                            <span class="mdl-chip__text">Show Tooltip</span>
+                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="toggle-tooltip">
+                                <input type="checkbox" id="toggle-tooltip" class="mdl-switch__input">
+                                <span class="mdl-switch__label"></span>
+                            </label>
+                        </span>
+                    </div>
+
+                    <!-- Visualization -->
+
+                    <div id="graph-artists"></div>
+
+                </div>
             </div>
         </div>
     </main>
@@ -158,7 +276,27 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="js/spotify-communication.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="js/scatterPlot.js"></script>
+<script src="js/artists-graph.js"></script>
+
+<script>
+
+
+    $("#playlists_header").click(function () {
+        document.getElementById("playlists_headline").scrollIntoView({behavior: "smooth"});
+    });
+
+    $("#audio_features_header").click(function () {
+        document.getElementById("audio_features_headline").scrollIntoView({behavior: "smooth"});
+    });
+
+    $("#artists_graph_header").click(function () {
+        document.getElementById("artists_graph_headline").scrollIntoView({behavior: "smooth"});
+    });
+</script>
+
 
 </body>
 </html>
