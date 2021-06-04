@@ -8,7 +8,7 @@
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
-[Website](./website/README.md)
+[Website](https://playlist-alchemy.herokuapp.com/);
 
 ## Milestone 1 (23rd April, 5pm)
 
@@ -226,6 +226,10 @@ See a short video presentation of our website:
 Report of the project, with details about the data and visualization: [Process Book](./non_website_docs/DV_Process_Book.pdf)
 
 ### Website
+
+- [https://playlist-alchemy.herokuapp.com/](https://playlist-alchemy.herokuapp.com/)
+
+
 
 Steps to run the website locally
 
