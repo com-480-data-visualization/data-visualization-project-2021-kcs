@@ -1,5 +1,6 @@
-node_modules/*
+node_modules
 *.ipynb_checkpoints
 .idea/*
 *.DS_Store
 *.cache
+*.env

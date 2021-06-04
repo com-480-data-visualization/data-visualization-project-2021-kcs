@@ -8,6 +8,8 @@
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
+[Website](./website/README.md)
+
 ## Milestone 1 (23rd April, 5pm)
 
 ### Dataset
@@ -173,22 +175,22 @@ The playlists used for this exploration are 'Rock Classics' and 'Oldies but Gold
 We present here some of the plots that we got from observing the two playlists: 
 
 #### Figure 1. Number of track per artist (Rock Classics)
-![](eda_images/eda_artist_rock.png)
+![](./non_website_docs/eda_images/eda_artist_rock.png)
 
 #### Figure 2. Artists relations graph  (Rock Classics)
-![](eda_images/eda_graph_rock.png)
+![](./non_website_docs/eda_images/eda_graph_rock.png)
 
 #### Figure 3. Artists relations graph (Oldies but Goldies)
-![](eda_images/eda_graph_oldies.png)
+![](./non_website_docs/eda_images/eda_graph_oldies.png)
 
 #### Figure 4. Number of track per genre (Oldies but Goldies)
-![](eda_images/eda_genre_oldies.png)
+![](./non_website_docs/eda_images/eda_genre_oldies.png)
 
 #### Figure 5. Number of track per release year (Rock Classics)
-![](eda_images/eda_release_rock.png)
+![](./non_website_docs/eda_images/eda_release_rock.png)
 
 #### Figure 6. Audio features distribution (Rock Classics and Oldies but Goldies)
-![](eda_images/eda_audio_features_compare.png)
+![](./non_website_docs/eda_images/eda_audio_features_compare.png)
 
 The detailed exploration can be found in the [milestone1_eda.ipynb](/milestone1_eda.ipynb) jupyter notebook. 
 
@@ -207,3 +209,56 @@ Here is a list of related works and sources of inspiration we found:
 - [Spotify user profile analysis](https://obscurifymusic.com/)
 - [Spotify user's top tracks and genres visualisation](https://lsouth.github.io/spotify-visualization)
 - [Interactive historical map of music](https://musicmap.info/)
+
+
+## Milestone 2
+
+See [Milestone2 pdf report](./Report%20Milestone%202.pdf)
+
+## Milestone 3
+
+### Screencast
+
+See a short video presentation of our website:
+
+### Process book 
+
+Report of the project, with details about the data and visualization: 
+
+### Website
+
+Steps to run the website locally
+
+1. Clone git repository
+
+```shell script
+git clone https://github.com/com-480-data-visualization/data-visualization-project-2021-kcs.git
+```
+
+2. Add '.env' file with Spotify API paramters:
+```shell script
+HOST=localhost
+PORT=8000
+SPOTIFY_CLIENT_ID=XXX
+SPOTIFY_SECRET=XXX
+```
+
+2. Go the the website root directory
+```shell script
+cd ./data-visualization-project-2021-kcs/
+```
+
+3. Install required packages
+```shell script
+npm install
+```
+
+4. Run the server locally
+```shell script
+npm start
+```
+
+
+
+
+
