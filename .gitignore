@@ -3,5 +3,4 @@ node_modules
 .idea/*
 *.DS_Store
 *.cache
-eda_images
 *.env

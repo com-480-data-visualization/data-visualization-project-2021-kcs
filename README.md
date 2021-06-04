@@ -175,22 +175,22 @@ The playlists used for this exploration are 'Rock Classics' and 'Oldies but Gold
 We present here some of the plots that we got from observing the two playlists: 
 
 #### Figure 1. Number of track per artist (Rock Classics)
-![](eda_images/eda_artist_rock.png)
+![](./non_website_docs/eda_images/eda_artist_rock.png)
 
 #### Figure 2. Artists relations graph  (Rock Classics)
-![](eda_images/eda_graph_rock.png)
+![](./non_website_docs/eda_images/eda_graph_rock.png)
 
 #### Figure 3. Artists relations graph (Oldies but Goldies)
-![](eda_images/eda_graph_oldies.png)
+![](./non_website_docs/eda_images/eda_graph_oldies.png)
 
 #### Figure 4. Number of track per genre (Oldies but Goldies)
-![](eda_images/eda_genre_oldies.png)
+![](./non_website_docs/eda_images/eda_genre_oldies.png)
 
 #### Figure 5. Number of track per release year (Rock Classics)
-![](eda_images/eda_release_rock.png)
+![](./non_website_docs/eda_images/eda_release_rock.png)
 
 #### Figure 6. Audio features distribution (Rock Classics and Oldies but Goldies)
-![](eda_images/eda_audio_features_compare.png)
+![](./non_website_docs/eda_images/eda_audio_features_compare.png)
 
 The detailed exploration can be found in the [milestone1_eda.ipynb](/milestone1_eda.ipynb) jupyter notebook. 
 
