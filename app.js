@@ -18,7 +18,7 @@ require('dotenv').config();
 const client_id = process.env.SPOTIFY_CLIENT_ID; // Your client id
 const client_secret = process.env.SPOTIFY_SECRET; // Your secret
 // Don't forget to put `https://playlist-alchemy.herokuapp.com/callback` for production
-const redirect_uri = `http://${process.env.HOST}:${process.env.PORT}/callback/`
+const redirect_uri = `https://playlist-alchemy.herokuapp.com/callback/`
 
 /**
  * Generates a random string containing numbers and letters
