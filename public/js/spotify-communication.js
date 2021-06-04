@@ -38,13 +38,13 @@
 
     // List default displayed playlists.
     let default_playlists = [
-        {id: '37i9dQZF1DWXRqgorJj26U', name: 'Rock'},
-        {id: '3P6fMeN40WHk1nuKMjhOXH', name: 'Classical Music'},
+        {id: '37i9dQZF1DWXTHBOfJ8aI7', name: 'Rock'},
+        {id: '37i9dQZF1DX17EDwCiiRhp', name: 'Classical'},
         {id: '37i9dQZF1DXch2nNxu927l', name: 'R&B'},
-        {id: '37i9dQZF1DXbITWG1ZJKYt', name: 'Jazz'},
+        {id: '37i9dQZF1DWSY3qrD2Jh0k', name: 'Road Trip'},
         {id: '37i9dQZF1DWX0o6sD1a6P5', name: 'Afro Music'},
         {id: '37i9dQZF1DX4RDXswvP6Mj', name: 'K-POP'},
-        {id: '37i9dQZF1DWWl7MndYYxge', name: '80\'s'},
+        {id: '37i9dQZF1DXcytuPF2IzEB', name: '80\'s'},
         {id: '37i9dQZF1DWTcqUzwhNmKv', name: 'Metal'}
     ];
 

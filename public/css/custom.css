@@ -16,10 +16,15 @@ html {
 
 }
 
+.footer {
+    margin-top: 100px;
+    margin-bottom: 200px;
+}
+
 #graph-artists {
     width: 1000px;
     height: 700px;
-    margin: auto auto 200px;
+    margin: auto auto;
 }
 
 .link line {
