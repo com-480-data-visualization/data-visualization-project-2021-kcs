@@ -8,7 +8,7 @@
 
 //
 let zoomScale = 1;
-const PATH_LENGTH_THRESHOLD = 2; // Filter the arcs path value to improve loading time.
+const PATH_LENGTH_THRESHOLD = 3; // Filter the arcs path value to improve loading time.
 
 // Settings values
 let displayArcs = false;
@@ -619,7 +619,7 @@ $(document).ajaxStop(function () {
 
                     return curve([[s.x, s.y], [(s.x + t.x) / 4, (s.y + t.y) / 4], [t.x, t.y]])
                 })
-                .attr('stroke', d => arcs_color[d.color*2]);
+                .attr('stroke', d => arcs_color[d.color]);
 
             /**
              * Change graph display from settings display button value

@@ -78,8 +78,7 @@
                 <p class="p-text">
                     Beneath the surface, playlists are a stranger beast than one might expect. <br>
                     It is quite common for a user-made playlist to include tracks from different albums,
-                    different artists, even different genres!
-
+                    different artists, even different genres! <br>
                     The playlist explorer helps you diving deep into your playlist and understand your tastes, or
                     discover new artists.
                 </p>
@@ -100,7 +99,10 @@
                 <!-- Not Yet Connected  -->
                 <div id="login">
 
-                    <p class="p-text">Connect your Spotify account via Spotify API to analyse your own playlists.</p>
+                    <p class="p-text">Connect your Spotify account via Spotify API to analyse your own playlists.
+                        <br>
+                        After connecting to your account on "My Playlists" to
+                    </p>
                     <br>
 
                     <a href="/login"
@@ -181,13 +183,81 @@
                 <h1 id="audio_features_headline"> AUDIO FEATURES VISUALIZATION</h1>
                 <hr>
 
+                <p class="p-text">
+                    The Spotify tracks contains Audio Features.
+                    These parameters describe the track musical information such as the "energy", "danceability". <br>
+
+                    In this visualization, you can choose which Audio Features to analyse. Compare the playlists and
+                    observe their differences and similarities.
+                    Explore specific areas of the visualization by selecting points on the plots. You can also select
+                    multiple features at the same time.
+                    <br>
+                </p>
+
+                <p class="p-list">
+                    <b>Audio features:</b>
+                </p>
+
+                <ul class="p-list">
+                    <li>
+                        <u><b>Acousticness</b></u>: A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0
+                        represents high
+                        confidence the track is acoustic.
+                    </li>
+                    <li>
+                        <u><b>Danceability</b></u> describes how suitable a track is for dancing based on a combination of
+                        musical
+                        elements including tempo, rhythm stability, beat strength, and overall regularity.
+                    </li>
+                    <li>
+                        <u><b>Valence</b></u>: a measure from 0.0 to 1.0 describing the musical positiveness conveyed by a
+                        track.
+                        Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with
+                        low
+                        valence sound more negative (e.g. sad, depressed, angry).
+                    </li>
+                    <li>
+                        <u><b>Energy</b></u> represents a perceptual measure of intensity and activity.
+                        Typically, energetic tracks feel fast, loud, and noisy.
+                        Perceptual features contributing to this attribute include dynamic range, perceived loudness,
+                        timbre, onset rate, and general entropy.
+                    </li>
+                    <li>
+                        <u><b>Instrumentalness</b></u> predicts whether a track contains no vocals.
+                        “Ooh” and “aah” sounds are treated as instrumental in this context.
+                        Rap or spoken word tracks are clearly “vocal”.
+                        The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no
+                        vocal
+                        content.
+                    </li>
+                    <li>
+                        <u><b>Speechiness</b></u> detects the presence of spoken words in a track.
+                        The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer
+                        to
+                        1.0 the attribute value.
+                        Values above 0.66 describe tracks that are probably made entirely of spoken words.
+                        Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in
+                        sections or layered, including such cases as rap music.
+                        Values below 0.33 most likely represent music and other non-speech-like tracks.
+                    </li>
+                    <li>
+                        <u><b>Liveness</b></u> detects the presence of an audience in the recording.
+                        Higher liveness values represent an increased probability that the track was performed live.
+                    </li>
+                </ul>
+
+                <br>
+
+
                 <!-- SCATTER PLOT VISUALIZATION  -->
                 <div id="scatter-viz">
                     <!-- PARAMETER SELECTION -->
-                    <label for="feature-select-button">Select features:</label>
-                    <select id="feature-select-button" multiple></select>
-                    <br>
-                    <svg id="scatter-plot-legend" height=200 width=450></svg>
+                    <div class="">
+                        <label for="feature-select-button">Select one or more features:</label>
+                        <br>
+                        <select class="select-button" id="feature-select-button" multiple></select>
+
+                    </div>
 
                     <div id="cross-correlation-grid"></div>
                 </div>
@@ -206,6 +276,50 @@
                         Navigate the graph, move your mouse on the nodes and track names to highlight the links.
                         Use the Arcs setting to observe internal and external playlists connections.
                     </p>
+
+                    <p class="p-list">
+                        <b>Graph Settings:</b>
+                    </p>
+
+                    <p class="p-list">1. Graph Visualizations</p>
+                    <ul class="p-list">
+                        <li>
+                            <b><u>Arcs:</u></b> Show links between tracks that share the same artist or from related artists.
+                            Explore what songs in a playlists are the most similar, search for connections between playlists' tracks.
+                        </li>
+                        <li>
+                            <b><u>Related Artists:</u></b>  Full circular graph or tracks, artists, and related artists nodes.
+                            Links between artists the "related artists" information, and each track is linked to their artists. <br>
+                            Move the mouse on a Track node to see directly related tracks and artists.
+                            Move on an artists node to see this tracks, and related artists' tracks.
+                        </li>
+                        <li>
+                            <b><u>Force links:</u></b> Force simulation where links strength make the nodes aggregate in together.
+                            When playlists are not connected, they will form distinct groups.
+                            Most adapted with high number of playlists or tracks.
+                        </li>
+
+                    </ul>
+
+                    <p class="p-list">2. Display</p>
+                    <ul class="p-list">
+                        <li>
+                            <b><u>Zoom and drag:</u></b> The graph size can vary a lot between different selection of playlists.
+                            We therefore implemented a zoom functionality of look closer or have a general overview.
+                            You can also drag the graph to observe a specific part or place it at the center of your screen.
+                        </li>
+                        <li>
+                            <b><u>Artists Name:</u></b> The artists' node do not display the name by default.
+                            With small graphs, you can activate this option to see all nodes names.
+                        </li>
+                        <li>
+                            <b><u>Legend:</u></b> The legend describes the color used for the different nodes (tracks from different playlists and artists.
+                            It can be remove when exploring the graph links.
+                        </li>
+                        <li>
+                            <b><u>Tooltip:</u></b> The tooltip can be used for the bigger graphs. Move your mouse on a node to see the name and type.
+                        </li>
+                    </ul>
 
                     <!-- Settings -->
                     <div class="centered-container">

@@ -9,6 +9,13 @@ html {
     margin: auto auto;
 }
 
+.p-list {
+    margin: auto auto;
+    width: 80%;
+
+
+}
+
 #graph-artists {
     width: 1000px;
     height: 700px;
@@ -151,8 +158,13 @@ iframe {
     margin: 50px;
 }
 
-.scatter-viz {
-    margin: 50px;
+
+.select-button {
+    width: 200px;
+}
+
+#scatter-viz {
+    margin: auto 100px;
 }
 
 

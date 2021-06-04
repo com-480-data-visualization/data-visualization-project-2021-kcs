@@ -191,6 +191,10 @@
                         playlist_data.duration = playlist_tracks.map(t => t.duration_ms);
                         playlist_data.track_ids = playlist_tracks.map(t => t.id);
                     },
+                    error: function (e) {
+                        alert("Error with API Call. Refresh token.");
+                        document.location.href="/";
+                    },
                     complete: function () {
                         // Build audio-features query from the first 100 tracks' id.
                         const tracks_100 = playlist_data.track_ids.slice(0,
