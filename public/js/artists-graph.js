@@ -11,6 +11,8 @@ let zoomScale = 1;
 const PATH_LENGTH_THRESHOLD = 3; // Filter the arcs path value to improve loading time.
 
 // Settings values
+let displayGraph = false;
+document.getElementById('graph-viz').style.display = "none";
 let displayArcs = false;
 let displayRelated = false;
 let displayArtistText = false;
@@ -46,6 +48,18 @@ function enable_button(name) {
     toggle.prop('disabled', false);
 
 }
+
+// Settings buttons
+$("#toggle-graph").click(() => {
+    displayGraph = !!$("#toggle-graph").is(':checked');
+    if (displayGraph) {
+        document.getElementById('graph-viz').style.display = "block"
+    } else {
+        document.getElementById('graph-viz').style.display = "none"
+    }
+
+    $.ajax() // update graph
+});
 
 // Settings buttons
 $("#toggle-force").click(() => {
@@ -126,6 +140,15 @@ const linkedByIndex = {};
 $(document).ajaxStop(function () {
 
         // Graph viz global variables
+
+
+        if (graph_data.length >= 3) {
+            graph_data = graph_data.map(p => {
+                p.tracks = p.tracks.slice(0, 30) // Get the 20 first tracks of a playlist
+                return p
+            })
+        }
+
         let g = new Graph();
 
         let songs_map = build_songs_map();
@@ -150,24 +173,27 @@ $(document).ajaxStop(function () {
          */
         function main() {
 
-            let graph = build_graph();
-            //console.log(graph);
+            if (displayGraph) {
 
-            //  Build first link
-            graph.links.forEach(d => {
-                linkedByIndex[`${d.source},${d.target}`] = 1;
-            });
+                let graph = build_graph();
+                //console.log(graph);
 
-            data = {
-                nodes: graph.nodes,
-                links: graph.links,
-                arcs: graph.arcs
-            };
+                //  Build first link
+                graph.links.forEach(d => {
+                    linkedByIndex[`${d.source},${d.target}`] = 1;
+                });
 
-            set_graph_size();
-            draw_tracks(data);
-            if (displayLegend) {
-                draw_legend();
+                data = {
+                    nodes: graph.nodes,
+                    links: graph.links,
+                    arcs: graph.arcs
+                };
+
+                set_graph_size();
+                draw_tracks(data);
+                if (displayLegend) {
+                    draw_legend();
+                }
             }
         }
 
@@ -782,6 +808,7 @@ $(document).ajaxStop(function () {
 
     }
 );
+
 
 
 /**
