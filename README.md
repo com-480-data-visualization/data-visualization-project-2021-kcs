@@ -219,7 +219,7 @@ See [Milestone2 pdf report](./Report%20Milestone%202.pdf)
 
 ### Screencast
 
-See a short video presentation of our website:
+See a short video presentation of our website: [Video]()
 
 ### Process book 
 
