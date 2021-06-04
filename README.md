@@ -223,7 +223,7 @@ See a short video presentation of our website:
 
 ### Process book 
 
-Report of the project, with details about the data and visualization: 
+Report of the project, with details about the data and visualization: [Process Book](./non_website_docs/DV_Process_Book.pdf)
 
 ### Website
 
