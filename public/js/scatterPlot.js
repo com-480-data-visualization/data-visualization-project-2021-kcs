@@ -38,37 +38,6 @@ function add_scatter_plot(x_feature, y_feature) {
   }
 
   return vlSpec
-
-  // Basic Customization
-  /*SVG.selectAll(".tick line").attr("stroke", "white");
-  SVG.selectAll(".tick text").attr("stroke", "white").style("font-size", 10);*/
-
-  /*user_data.forEach(function (pl_data) {
-    // Add circles
-    let dots = SVG.selectAll("circle")
-        .data(d3.zip(pl_data[x_feature], pl_data[y_feature], pl_data['track_names']));
-
-    dots.enter().append("circle")
-        .style("fill", function () {
-            return color(pl_data.color)
-        })
-        .style("stroke", "white")
-        .style("stroke-width", 1)
-        .style("opacity", 0.8)
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
-        .attr("cx", function (d) {
-            return x(d[0]);
-        })
-        .transition().duration(500)
-        .attr("cy", function (d) {
-            return y(d[1]);
-        })
-        .attr("r", 5)
-  });*/
-
-  //return SVG
 }
 
 function add_histogram(feature) {
@@ -115,37 +84,6 @@ d3.select("#feature-select-button")
         return d;
     }); // corresponding value returned by the button
 
-// Tooltip 
-let tooltip = d3.select("#scatter-plot")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("position", "absolute")
-    .style("color", "black")
-    .style("background-color", "white")
-    .style("border", "solid")
-    .style("border-width", "1px")
-    .style("border-radius", "5px")
-    .style("width", "50%")
-    .style("padding", "10px");
-
-
-// A function that change this tooltip when the user hover a point.
-let mouseover = function () {
-    tooltip.style("opacity", 1)
-};
-
-let mousemove = function (d) {
-    tooltip.html(d[2])
-        .style("left", (d3.mouse(this)[0] + 90) + "px")
-        .style("top", (d3.mouse(this)[1]) + "px")
-};
-
-let mouseleave = function () {
-    tooltip.transition().duration(200)
-        .style("opacity", 0)
-};
-
 // Colors to use for each playlist 
 let color = d3.scaleOrdinal()
     .domain([1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -177,7 +115,6 @@ function update(features) {
 
   user_data.forEach(function (playlist_data) {
     for (feature of features) {
-      console.log("In loop, feature " + feature)
       playlist_feature = {'key': feature, 'category': playlist_counter}
       feature_value = 0
       for (i = 0; i < playlist_data[features[0]].length; i++) {
@@ -282,21 +219,6 @@ function update(features) {
               }
             }
           },
-          /*{
-            type: 'text',
-            name: 'value-text',
-            from: {data: 'category-line'},
-            encode: {
-              enter: {
-                x: {signal: "datum.x"},
-                y: {signal: "datum.y"},
-                text: {signal: "datum.datum.value"},
-                align: {value: 'center'},
-                baseline: {value: 'middle'},
-                fill: {value: 'white'}
-              }
-            }
-          }*/
         ]
       },
       {
@@ -407,7 +329,9 @@ function update(features) {
 
   // Embed the general and the detailed visualizations in the web page
   vegaEmbed(radarSpec, {actions: false}).then(res => document.getElementById('cross-correlation-grid').append(res))
-  vegaEmbed(scatterSpec, {actions: false}).then(res => document.getElementById('cross-correlation-grid').append(res))
+  vegaEmbed(scatterSpec, {actions: false}).then(res => {
+    document.getElementById('cross-correlation-grid').append(res)
+  })
 }
 
 update(['acousticness', 'danceability', 'speechiness']);
