@@ -115,7 +115,7 @@ function update(features) {
 
   user_data.forEach(function (playlist_data) {
     for (feature of features) {
-      playlist_feature = {'key': feature, 'category': playlist_counter}
+      playlist_feature = {'key': feature, 'category': playlist_data.playlist_name}
       feature_value = 0
       for (i = 0; i < playlist_data[features[0]].length; i++) {
         feature_value += playlist_data[feature][i]
@@ -194,6 +194,15 @@ function update(features) {
         y: {signal: 'radius'}
       }
     },
+    legends: [
+      {
+        fill: 'color',
+        orient: 'none',
+        legendX: 100,
+        legendY: 150,
+        labelColor: 'white'
+      }
+    ],
     marks: [
       {
         type: 'group',
